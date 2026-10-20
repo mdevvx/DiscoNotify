@@ -70,6 +70,9 @@ const testing: Platform[] = [
     },
 ];
 
+// Per-platform notes cards under the table are hidden for now. Set to true to show them again.
+const SHOW_NOTES = false;
+
 const notes = [
     {
         title: "YouTube",
@@ -185,6 +188,7 @@ export function Platforms() {
                     </table>
                 </div>
 
+                {SHOW_NOTES && (
                 <ul className="matrix-notes reveal">
                     {notes.map((n) => (
                         <li
@@ -209,6 +213,7 @@ export function Platforms() {
                         </li>
                     ))}
                 </ul>
+                )}
             </div>
         </section>
     );
