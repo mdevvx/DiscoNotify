@@ -138,12 +138,12 @@ export function Platforms() {
 
         <ul className="matrix-notes reveal">
           {notes.map((n) => (
-            <li key={n.title} className={n.wide ? "note-wide" : undefined}>
+            <li key={n.title} className={n.wide ? "note-wide" : undefined} style={{ "--c": n.color } as React.CSSProperties}>
               <h3>
                 <i className="dot" style={{ background: n.color }} />
                 {n.title}
               </h3>
-              <p>{n.text}</p>
+              <p className="note-text">{n.text}</p>
               {n.limits && (
                 <p className="note-limit">
                   <span>Not covered</span>
