@@ -7,6 +7,7 @@ import { Alert } from "./Alert";
 import { api, ApiError, Guild, longDate, newNonce, store, StoredSession } from "./api";
 import { PayPanel, type Auth, type PayInfo } from "./PayPanel";
 import { ServerSelect } from "./ServerSelect";
+import { LockIcon, Stepper } from "./Stepper";
 
 type LinkInfo = {
   guild_id: string;
@@ -110,6 +111,8 @@ export function Subscribe() {
     setView({ mode: "login" });
   }
 
+  const step = view.mode === "link" ? 3 : view.mode === "servers" && view.chosen ? 3 : view.mode === "servers" ? 2 : 1;
+
   return (
     <section className="pay">
       <div className="wrap pay-grid">
@@ -127,9 +130,17 @@ export function Subscribe() {
             <li>{site.price.trialDays}-day free trial: pay by card and nothing is charged until it ends</li>
             <li>Cancel anytime, with a 14-day money-back guarantee</li>
           </ul>
+          <div className="trust">
+            <span>
+              <LockIcon /> Encrypted checkout
+            </span>
+            <span>Card by Polar</span>
+            <span>Crypto by NOWPayments</span>
+          </div>
         </div>
 
-        <div className="plan">
+        <div className="flow-card">
+          <Stepper current={step} />
           {!site.billingApi ? (
             <Alert tone="warning" title="Payments aren't set up yet">
               Subscribing opens soon. Meanwhile run <code>/notify subscribe</code> in your server.
@@ -170,15 +181,23 @@ export function Subscribe() {
               />
             ) : (
               <div className="pay-form">
+                <div className="step-head">
+                  <h2>Choose your server</h2>
+                  <p>Only servers you manage are shown.</p>
+                </div>
                 <div className="server-chip">
-                  <span>
-                    Logged in as <strong>{view.session.user.name}</strong>
+                  <span className="user-line">
+                    <span className="user-avatar" aria-hidden="true">
+                      {view.session.user.name.slice(0, 1).toUpperCase()}
+                    </span>
+                    <span>
+                      Logged in as <strong>{view.session.user.name}</strong>
+                    </span>
                   </span>
                   <button type="button" className="link-btn" onClick={logout}>
                     Log out
                   </button>
                 </div>
-                <p className="server-state">Choose the server to subscribe. Only servers you manage are shown.</p>
                 {view.session.guilds.length === 0 ? (
                   <Alert tone="warning" title="No servers found">
                     You don&apos;t manage any Discord server yet. You need the Manage Server permission to subscribe one.
@@ -195,6 +214,10 @@ export function Subscribe() {
             )
           ) : (
             <div className="pay-form">
+              <div className="step-head">
+                <h2>Log in with Discord</h2>
+                <p>So we can show the servers you manage and tie the payment to your account.</p>
+              </div>
               <div className="plan-top">
                 <p className="plan-name">{site.name}</p>
                 <p className="plan-price">
@@ -202,7 +225,7 @@ export function Subscribe() {
                   {site.price.amount}
                   <span className="per">/ {site.price.period}</span>
                 </p>
-                <p className="plan-unit">per Discord server</p>
+                <p className="plan-unit">per Discord server · {site.price.trialDays}-day free trial</p>
               </div>
 
               {view.notice === "expired" && (
@@ -216,10 +239,12 @@ export function Subscribe() {
                 <DiscordIcon />
                 {busy ? "Opening Discord…" : "Log in with Discord"}
               </button>
-              <p className="field-help">
-                We use your Discord login only to show the servers you manage and tie the payment to your Discord ID. It
-                can&apos;t post or read messages, and we discard it right after.
-              </p>
+              <ul className="perm-list" aria-label="What this login allows">
+                <li>See your Discord name and ID</li>
+                <li>See the servers you manage</li>
+                <li className="perm-no">Can&apos;t post or read your messages</li>
+              </ul>
+              <p className="field-help">We discard the Discord login as soon as your server list is loaded.</p>
             </div>
           )}
         </div>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Alert } from "./Alert";
 import { api, store, type Guild } from "./api";
+import { Stepper } from "./Stepper";
 
 type LoginResult = {
   session: string;
@@ -45,7 +46,8 @@ export function AuthCallback() {
   return (
     <section className="pay">
       <div className="wrap narrow">
-        <div className="plan">
+        <div className="flow-card">
+          <Stepper current={1} />
           {problem === null ? (
             <p className="status-line" role="status">
               <span className="spinner" aria-hidden="true" />

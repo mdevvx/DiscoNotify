@@ -6,6 +6,7 @@ import { site } from "@/lib/site";
 import { Alert } from "./Alert";
 import { api, ApiError, goToPolar, longDate, money, type Guild } from "./api";
 import { ServerIcon } from "./ServerSelect";
+import { LockIcon } from "./Stepper";
 
 export type Auth = { t: string } | { session: string; guild_id: string };
 
@@ -119,6 +120,37 @@ export function PayPanel({ auth, info, onBack }: { auth: Auth; info: PayInfo; on
         )}
       </div>
 
+      <div className="step-head">
+        <h2>Review and pay</h2>
+        <p>One server, billed per month. Cancel anytime.</p>
+      </div>
+
+      <dl className="summary" aria-label="Order summary">
+        <div>
+          <dt>DiscoNotify · 1 server</dt>
+          <dd>
+            {money(info.price)}
+            <small> / {site.price.period}</small>
+          </dd>
+        </div>
+        {method === "crypto" && info.crypto && (
+          <div>
+            <dt>
+              Prepaid {months} months
+            </dt>
+            <dd>{money(Math.round(info.price * months * 100) / 100)}</dd>
+          </div>
+        )}
+        {method === "card" && info.trialDays > 0 && !info.cardActive && (
+          <div className="summary-free">
+            <dt>
+              Free trial · {info.trialDays} day{info.trialDays === 1 ? "" : "s"} left
+            </dt>
+            <dd>Due today {money(0)}</dd>
+          </div>
+        )}
+      </dl>
+
       {info.trialDays > 0 && (
         <Alert tone="success" title={`Free trial: ${info.trialDays} more day${info.trialDays === 1 ? "" : "s"}`}>
           Pay by card now and your card is saved, but <strong>nothing is charged for {info.trialDays} more day
@@ -156,10 +188,12 @@ export function PayPanel({ auth, info, onBack }: { auth: Auth; info: PayInfo; on
 
       <div className="tabs" role="tablist" aria-label="Payment method">
         <button type="button" role="tab" aria-selected={method === "card"} className="tab" onClick={() => setMethod("card")}>
-          Card
+          <span className="tab-title">Card</span>
+          <span className="tab-sub">Renews monthly</span>
         </button>
         <button type="button" role="tab" aria-selected={method === "crypto"} className="tab" onClick={() => setMethod("crypto")}>
-          Crypto
+          <span className="tab-title">Crypto</span>
+          <span className="tab-sub">Prepay 3–12 months</span>
         </button>
       </div>
 
@@ -175,7 +209,8 @@ export function PayPanel({ auth, info, onBack }: { auth: Auth; info: PayInfo; on
           <>
             <p className="field-help">{money(info.price)} a month, renews automatically. Cancel anytime.</p>
             <button type="button" className="btn btn-primary plan-cta" onClick={payByCard} disabled={busy || !emailOk}>
-              {busy ? "Opening checkout…" : "Pay by card"}
+              <LockIcon />
+              {busy ? "Opening checkout…" : "Continue to secure checkout"}
             </button>
           </>
         )
@@ -207,6 +242,7 @@ export function PayPanel({ auth, info, onBack }: { auth: Auth; info: PayInfo; on
             <p className="field-help">USDT on BNB Chain and Litecoin have the lowest network minimums.</p>
           </div>
           <button type="button" className="btn btn-primary plan-cta" onClick={payByCrypto} disabled={busy || !emailOk}>
+            <LockIcon />
             {busy ? "Creating payment…" : "Get payment address"}
           </button>
         </>

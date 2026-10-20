@@ -122,7 +122,7 @@ export function Thanks() {
   return (
     <section className="pay">
       <div className="wrap narrow">
-        <div className="plan">
+        <div className="flow-card">
           <div className="pay-form">
             <p className="plan-name">Payment</p>
             {alert}

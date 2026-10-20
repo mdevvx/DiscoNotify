@@ -3,8 +3,7 @@ import { site } from "@/lib/site";
 import { themeInitScript } from "@/lib/theme";
 import { MaintenanceBanner } from "@/components/MaintenanceBanner";
 // Self-hosted fonts (bundled at build time, no requests to Google)
-import "@fontsource-variable/bricolage-grotesque";
-import "@fontsource-variable/instrument-sans";
+import "@fontsource-variable/plus-jakarta-sans";
 import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
 

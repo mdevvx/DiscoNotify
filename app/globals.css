@@ -32,8 +32,8 @@
   --discord: #5865f2;
 
   /* Type */
-  --font-display: "Bricolage Grotesque Variable", "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --font-body: "Instrument Sans Variable", "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-display: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   --step--1: 0.875rem;
@@ -1108,3 +1108,96 @@ html.js .reveal.in { transform: none; }
   .preview { transform: none; }
   .feature:hover, .step:hover, .pay-way:hover { transform: none; }
 }
+
+/* ==========================================================================
+   Subscribe flow: login, server, payment
+   ========================================================================== */
+.pay { position: relative; isolation: isolate; }
+.pay::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 28rem; pointer-events: none; z-index: -1;
+  background: radial-gradient(40rem 22rem at 80% 0%, color-mix(in srgb, var(--signal) 14%, transparent), transparent 70%);
+}
+.pay-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 460px); }
+.pay-copy .plan-list { margin-top: 0.4rem; }
+.trust { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.4rem; }
+.trust span {
+  display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.75rem; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--line); font-size: 0.8rem; font-weight: 600; color: var(--ink-2);
+}
+
+.flow-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 20px; min-width: 0;
+  padding: clamp(1.25rem, 3vw, 1.75rem); display: grid; gap: 1.5rem; box-shadow: var(--shadow-lg);
+}
+.flow-card .pay-form { gap: 1.15rem; }
+.step-head { display: grid; gap: 0.25rem; }
+.step-head h2 { font-size: var(--step-2); letter-spacing: -0.025em; }
+.step-head p { color: var(--ink-3); font-size: 0.92rem; }
+
+/* Stepper */
+.stepper { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; counter-reset: none; }
+.stepper-item { position: relative; display: grid; gap: 0.45rem; justify-items: start; font-size: 0.8rem; font-weight: 600; color: var(--ink-3); }
+.stepper-item::before {
+  content: ""; position: absolute; top: 13px; left: 34px; right: -0.5rem; height: 2px; border-radius: 2px; background: var(--line);
+}
+.stepper-item:last-child::before { display: none; }
+.stepper-item[data-state="done"]::before { background: var(--signal); }
+.stepper-dot {
+  position: relative; z-index: 1; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--surface-2); border: 1px solid var(--line); font-size: 0.8rem; font-weight: 700; color: var(--ink-3);
+}
+.stepper-dot svg { width: 14px; height: 14px; }
+.stepper-item[data-state="current"] { color: var(--ink); }
+.stepper-item[data-state="current"] .stepper-dot { background: var(--grad-signal); border-color: transparent; color: #fff; box-shadow: 0 0 0 4px color-mix(in srgb, var(--signal) 22%, transparent); }
+.stepper-item[data-state="done"] { color: var(--ink-2); }
+.stepper-item[data-state="done"] .stepper-dot { background: var(--signal); border-color: transparent; color: #fff; }
+
+/* Login + server */
+.flow-card .plan-top { padding: 1rem 1.1rem; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); }
+.flow-card .plan-price { font-size: 3rem; }
+.flow-card .plan-price .cur { font-size: 1.4rem; }
+.perm-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+.perm-list li { display: flex; gap: 0.6rem; align-items: center; font-size: 0.9rem; color: var(--ink-2); }
+.perm-list li::before {
+  content: ""; flex: none; width: 18px; height: 18px; border-radius: 50%; background: var(--ok);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.4 14.2-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.4 14.2-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.perm-list .perm-no::before { background: var(--no); }
+.user-line { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+.user-avatar { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--grad-signal); color: #fff; font-size: 0.8rem; font-weight: 700; }
+.server-chip { border-radius: 12px; }
+.select-trigger { min-height: 3.4rem; border-radius: 12px; }
+
+/* Order summary */
+.summary { margin: 0; display: grid; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); overflow: hidden; }
+.summary > div { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.75rem 1rem; font-size: 0.92rem; }
+.summary > div + div { border-top: 1px dashed var(--line); }
+.summary dt { color: var(--ink-2); }
+.summary dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+.summary dd small { font-weight: 500; color: var(--ink-3); }
+.summary .summary-free { background: color-mix(in srgb, var(--ok) 9%, transparent); }
+.summary .summary-free dt, .summary .summary-free dd { color: var(--ok); }
+
+/* Payment method + plan choices */
+.tabs { gap: 6px; padding: 5px; border-radius: 14px; }
+.tab { display: grid; gap: 0.1rem; padding: 0.65rem 0.5rem; border-radius: 10px; transition: background-color 0.15s ease, box-shadow 0.15s ease; }
+.tab-title { font-weight: 700; font-size: 0.95rem; }
+.tab-sub { font-size: 0.75rem; font-weight: 500; color: var(--ink-3); }
+.tab[aria-selected="true"] { box-shadow: var(--shadow-sm); }
+.tab:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+.choice span { border-radius: 12px; padding: 0.8rem 0.6rem; background: var(--bg); }
+.choice:hover span { border-color: color-mix(in srgb, var(--signal) 45%, var(--line)); }
+.choice input:checked + span { box-shadow: 0 0 0 3px color-mix(in srgb, var(--signal) 20%, transparent); }
+.field input, .field select { border-radius: 12px; padding: 0.8rem 0.95rem; }
+.field select:focus { outline: none; border-color: var(--signal); box-shadow: var(--ring); }
+.flow-card .plan-cta { width: 100%; justify-content: center; padding-block: 0.95rem; }
+.flow-card .plan-note { text-align: left; }
+
+/* Crypto payment instructions */
+.copy-row code { border-radius: 10px; font-size: 0.88rem; }
+.copy-btn { border-radius: 10px; min-width: 4.5rem; }
+.status-line { padding: 0.8rem 1rem; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); }
+
+@media (max-width: 860px) { .pay-grid { grid-template-columns: 1fr; } .pay::before { display: none; } }
+@media (max-width: 420px) { .stepper-label { font-size: 0.72rem; } .flow-card { border-radius: 16px; } }
