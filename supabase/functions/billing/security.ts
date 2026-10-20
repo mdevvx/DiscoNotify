@@ -74,7 +74,7 @@ async function seal(data: Record<string, unknown>, secret: string, label: string
 const DISCORD_ID = /^\d{1,20}$/;
 const isDiscordId = (v: unknown): v is string => typeof v === "string" && DISCORD_ID.test(v);
 
-// ── links from the bot (/disconotify subscribe) ──────────────────────────
+// ── links from the bot (/notify subscribe) ──────────────────────────
 // Format is fixed by the bot (billing/links.py): signature = HMAC-SHA256(secret, payload), no label.
 
 export type LinkData = { g: string; u?: string; c?: string; n?: string; d: number; e: number };

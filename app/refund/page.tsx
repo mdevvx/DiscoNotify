@@ -137,7 +137,7 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          Cancel a card subscription any time with <code>/disconotify cancel</code> in your server, or from our{" "}
+          Cancel a card subscription any time with <code>/notify cancel</code> in your server, or from our{" "}
           <Link href="/manage">Manage or cancel</Link> page. Only the person who subscribed, or the server owner, can open
           the billing portal. If you cancel during the free trial you are never charged. If you cancel after paying, the
           server stays active until the end of the month you paid for. Crypto plans don&apos;t renew, so there is nothing

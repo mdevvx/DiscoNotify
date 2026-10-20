@@ -65,7 +65,7 @@ export function Thanks() {
   } else if (outcome.kind === "none" || outcome.status === "open") {
     alert = (
       <Alert tone="warning" title="The payment wasn't completed">
-        If you closed the checkout, run <code>/disconotify subscribe</code> again.
+        If you closed the checkout, run <code>/notify subscribe</code> again.
       </Alert>
     );
   } else if (outcome.status === "succeeded") {
@@ -83,7 +83,7 @@ export function Thanks() {
         )}
         {active === "active" && (
           <Alert tone="success" title="Active">
-            Your server is switched on. Check it anytime with <code>/disconotify status</code>.
+            Your server is switched on. Check it anytime with <code>/notify status</code>.
           </Alert>
         )}
         {active === "slow" && (
@@ -102,13 +102,13 @@ export function Thanks() {
   } else if (outcome.status === "expired") {
     alert = (
       <Alert tone="warning" title="This checkout expired">
-        Run <code>/disconotify subscribe</code> in Discord for a new link.
+        Run <code>/notify subscribe</code> in Discord for a new link.
       </Alert>
     );
   } else if (outcome.status === "failed") {
     alert = (
       <Alert tone="error" title="The payment didn't go through">
-        Nothing was charged. Try another card from <code>/disconotify subscribe</code>, or contact {site.supportEmail}.
+        Nothing was charged. Try another card from <code>/notify subscribe</code>, or contact {site.supportEmail}.
       </Alert>
     );
   } else {

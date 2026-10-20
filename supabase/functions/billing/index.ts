@@ -248,7 +248,8 @@ async function nowpayments(method: string, path: string, body?: unknown) {
   }, "NOWPayments");
   if (!res.ok) {
     console.error("NOWPayments error", res.status, text.slice(0, 500));
-    throw new HttpError(502, PROVIDER_DOWN, "provider");
+    // Like polar_<status>: says what kind of failure it was, nothing more.
+    throw new HttpError(502, PROVIDER_DOWN, `nowpayments_${res.status}`);
   }
   return json;
 }
@@ -376,7 +377,7 @@ async function checkout(body: Record<string, unknown>) {
   const row = (await billingRows([who.guildId])).get(who.guildId);
   // Two subscriptions would mean double charges.
   if (cardActive(row)) {
-    throw new HttpError(409, "This server already has a card subscription. Manage it with /disconotify cancel in Discord.", "already_subscribed");
+    throw new HttpError(409, "This server already has a card subscription. Manage it with /notify cancel in Discord.", "already_subscribed");
   }
 
   const trialDays = who.viaLink ? who.trialDays ?? 0 : trialDaysFor(row);

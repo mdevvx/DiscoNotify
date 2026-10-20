@@ -19,7 +19,7 @@ const faqs: { q: string; a: ReactNode }[] = [
     q: "Can I pay with crypto?",
     a: (
       <>
-        Yes. Choose Crypto on the <Link href="/subscribe">subscribe page</Link> or run <code>/disconotify subscribe</code>, then pick 3, 6 or 12 months, paid up front in USDT,
+        Yes. Choose Crypto on the <Link href="/subscribe">subscribe page</Link> or run <code>/notify subscribe</code>, then pick 3, 6 or 12 months, paid up front in USDT,
         BTC, ETH, SOL or LTC. Crypto can&apos;t renew automatically, so it&apos;s prepaid, and extra months stack.
       </>
     ),
@@ -46,7 +46,7 @@ const faqs: { q: string; a: ReactNode }[] = [
     a: (
       <>
         DiscoNotify marks the channel as unavailable and stops trying to post there. Run{" "}
-        <code>/disconotify status</code> to see which accounts need a new channel.
+        <code>/notify status</code> to see which accounts need a new channel.
       </>
     ),
   },
@@ -58,7 +58,7 @@ const faqs: { q: string; a: ReactNode }[] = [
     q: "Do I need to set anything up for TikTok?",
     a: (
       <>
-        No. Run <code>/disconotify account-add</code>, choose TikTok and enter <code>@username</code> or the profile
+        No. Run <code>/notify account-add</code>, choose TikTok and enter <code>@username</code> or the profile
         link. Live streams and private accounts aren&apos;t supported, and TikTok counts toward your server&apos;s
         account limit like any other platform.
       </>

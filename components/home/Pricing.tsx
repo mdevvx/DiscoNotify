@@ -46,7 +46,7 @@ export function Pricing() {
                     {m} months ({money(amount * m)})
                   </span>
                 ))}
-                . USDT, BTC, ETH, SOL and LTC, at checkout or with <code>/disconotify subscribe</code>.
+                . USDT, BTC, ETH, SOL and LTC, at checkout or with <code>/notify subscribe</code>.
               </p>
             </div>
           </div>

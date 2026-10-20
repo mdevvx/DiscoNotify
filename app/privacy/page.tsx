@@ -45,12 +45,12 @@ const sections: LegalSection[] = [
           <table className="data-table">
             <thead><tr><th scope="col">Data</th><th scope="col">Example</th><th scope="col">Why we need it</th></tr></thead>
             <tbody>
-              <tr><td>Server ID</td><td>The numeric Discord ID of your server, and whether DiscoNotify is on or paused there</td><td>To keep each server's settings separate and respect <code>/disconotify toggle</code></td></tr>
+              <tr><td>Server ID</td><td>The numeric Discord ID of your server, and whether DiscoNotify is on or paused there</td><td>To keep each server's settings separate and respect <code>/notify toggle</code></td></tr>
               <tr><td>Followed accounts</td><td>Platform, handle or channel ID, display name, profile link. For TikTok: the public username, numeric ID, display name and avatar link</td><td>To know which accounts to check for your server</td></tr>
               <tr><td>Alert channels</td><td>Channel ID and the webhook created in that channel</td><td>To post alerts where you chose, under the name and avatar you set</td></tr>
               <tr><td>Alert settings</td><td>Which alert types are on, whether full cards are shown</td><td>To send only the alerts you want</td></tr>
               <tr><td>Mention settings</td><td>A role ID, @everyone or none</td><td>To ping the right people</td></tr>
-              <tr><td>Custom messages</td><td>Text you write with <code>/disconotify account-set-message</code></td><td>To use your wording in alerts</td></tr>
+              <tr><td>Custom messages</td><td>Text you write with <code>/notify account-set-message</code></td><td>To use your wording in alerts</td></tr>
             </tbody>
           </table>
         </div>
@@ -63,7 +63,7 @@ const sections: LegalSection[] = [
               <tr><td>Alert history</td><td>The platform's ID for each video, post or stream already announced, and when</td><td>So the same upload or stream is never announced twice</td></tr>
               <tr><td>Live state</td><td>Whether a followed account is currently live</td><td>So a bot restart doesn't re-announce a stream already in progress</td></tr>
               <tr><td>Last seen content</td><td>The newest upload or post we have seen for an account, including the caption, cover and link for TikTok videos</td><td>To detect what is new on the next check</td></tr>
-              <tr><td>Check status</td><td>When an account was last checked, and whether it can still be found</td><td>To show <code>/disconotify status</code> and stop checking accounts that no longer exist</td></tr>
+              <tr><td>Check status</td><td>When an account was last checked, and whether it can still be found</td><td>To show <code>/notify status</code> and stop checking accounts that no longer exist</td></tr>
             </tbody>
           </table>
         </div>
@@ -154,7 +154,7 @@ const sections: LegalSection[] = [
     body: (
       <>
         <ul>
-          <li><strong>Removing an account</strong> with <code>/disconotify account-remove</code> (also how a creator can ask to stop being monitored, by asking a server admin or contacting us below) deletes that account's settings, custom message and alert history for your server right away.</li>
+          <li><strong>Removing an account</strong> with <code>/notify account-remove</code> (also how a creator can ask to stop being monitored, by asking a server admin or contacting us below) deletes that account's settings, custom message and alert history for your server right away.</li>
           <li><strong>Removing DiscoNotify</strong> from your server: we delete that server's data within 30 days.</li>
           <li><strong>Deleting an alert channel</strong> stops alerts to it. The channel record is marked as unavailable and is deleted with the rest of the server's data.</li>
           <li><strong>Technical logs</strong> are kept for up to 30 days.</li>
@@ -180,7 +180,7 @@ const sections: LegalSection[] = [
     title: "Your choices and rights",
     body: (
       <>
-        <p>Server admins can view everything stored for an account with <code>/disconotify account-info</code> and <code>/disconotify status</code>, change it with the configuration commands, and delete it as described above.</p>
+        <p>Server admins can view everything stored for an account with <code>/notify account-info</code> and <code>/notify status</code>, change it with the configuration commands, and delete it as described above.</p>
         <p>Depending on where you live, including under the GDPR and UK GDPR, you have the right to access the personal data we hold about you, correct it, have it deleted, restrict or object to how we use it, receive a copy in a portable format, and withdraw consent where we rely on it. To use any of these rights, contact us and we'll respond within one month.</p>
         <p>You also have the right to complain to your local data protection authority. We'd appreciate the chance to resolve your concern first.</p>
       </>

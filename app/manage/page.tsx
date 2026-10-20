@@ -34,7 +34,7 @@ export default function ManagePage() {
                 <h2>Cancel or update your card</h2>
                 <ol className="manage-steps">
                   <li>
-                    In your Discord server, run <code>/disconotify cancel</code>.
+                    In your Discord server, run <code>/notify cancel</code>.
                   </li>
                   <li>Press the button to open your private billing portal.</li>
                   <li>

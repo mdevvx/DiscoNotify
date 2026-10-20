@@ -4,12 +4,14 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { site } from "@/lib/site";
 import { Alert } from "./Alert";
-import { api, ApiError, goToPolar, longDate, money } from "./api";
+import { api, ApiError, goToPolar, longDate, money, type Guild } from "./api";
+import { ServerIcon } from "./ServerSelect";
 
 export type Auth = { t: string } | { session: string; guild_id: string };
 
 export type PayInfo = {
   name: string;
+  guild?: Guild; // set when the server was picked from the list, so its icon can be shown
   trialDays: number;
   cardActive: boolean;
   price: number;
@@ -94,7 +96,8 @@ export function PayPanel({ auth, info, onBack }: { auth: Auth; info: PayInfo; on
     try {
       setPayment(await api<CryptoPayment>({ action: "crypto", ...auth, months, coin }));
     } catch (err) {
-      setError((err as Error).message);
+      const code = err instanceof ApiError ? err.code : "";
+      setError(code.startsWith("nowpayments_") ? `${(err as Error).message} (ref: ${code})` : (err as Error).message);
     } finally {
       setBusy(false);
     }
@@ -105,8 +108,11 @@ export function PayPanel({ auth, info, onBack }: { auth: Auth; info: PayInfo; on
   return (
     <div className="pay-form">
       <div className="server-chip">
-        <span>
-          Server <strong>{info.name || "your server"}</strong>
+        <span style={{ display: "flex", alignItems: "center", gap: "0.6rem", minWidth: 0 }}>
+          {info.guild && <ServerIcon g={info.guild} size={28} />}
+          <span>
+            Server <strong>{info.name || "your server"}</strong>
+          </span>
         </span>
         {onBack && (
           <button type="button" className="link-btn" onClick={onBack}>
@@ -118,7 +124,7 @@ export function PayPanel({ auth, info, onBack }: { auth: Auth; info: PayInfo; on
       {info.trialDays > 0 && (
         <Alert tone="success" title={`Free trial: ${info.trialDays} more day${info.trialDays === 1 ? "" : "s"}`}>
           Pay by card now and your card is saved, but <strong>nothing is charged for {info.trialDays} more day
-          {info.trialDays === 1 ? "" : "s"}</strong>. Cancel before then with <code>/disconotify cancel</code> and you
+          {info.trialDays === 1 ? "" : "s"}</strong>. Cancel before then with <code>/notify cancel</code> and you
           pay nothing.
         </Alert>
       )}
@@ -164,7 +170,7 @@ export function PayPanel({ auth, info, onBack }: { auth: Auth; info: PayInfo; on
           <p className="field-help">Card payments aren&apos;t available right now. Try crypto instead.</p>
         ) : info.cardActive ? (
           <Alert tone="warning" title="Already subscribed">
-            This server already has a card subscription. Manage it with <code>/disconotify cancel</code> in Discord, or
+            This server already has a card subscription. Manage it with <code>/notify cancel</code> in Discord, or
             see the <Link href="/manage">Manage or cancel</Link> page.
           </Alert>
         ) : (

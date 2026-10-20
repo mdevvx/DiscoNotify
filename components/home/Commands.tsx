@@ -63,9 +63,9 @@ export function Commands() {
             <div className="wrap">
                 <div className="section-head reveal">
                     <p className="eyebrow">Commands</p>
-                    <h2>Everything lives under /disconotify</h2>
+                    <h2>Everything lives under /notify</h2>
                     <p>
-                        Run <code>/disconotify help</code> in your server for
+                        Run <code>/notify help</code> in your server for
                         the full list.
                     </p>
                 </div>
@@ -82,7 +82,7 @@ export function Commands() {
                             {commands.map((c) => (
                                 <tr key={c.cmd}>
                                     <td>
-                                        <code>/disconotify {c.cmd}</code>
+                                        <code>/notify {c.cmd}</code>
                                     </td>
                                     <td>{c.desc}</td>
                                     <td

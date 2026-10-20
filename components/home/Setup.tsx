@@ -49,14 +49,14 @@ export function Setup() {
           <li className="step reveal">
             <h3>Add an account</h3>
             <p>
-              Run <code>/disconotify account-add</code>, pick the platform, paste the handle or link and choose the
+              Run <code>/notify account-add</code>, pick the platform, paste the handle or link and choose the
               channel. A role to mention is optional.
             </p>
           </li>
           <li className="step reveal">
             <h3>Fine-tune the alerts</h3>
             <p>
-              Use <code>/disconotify alerts</code> to pick alert types, and set a custom message or mention whenever you
+              Use <code>/notify alerts</code> to pick alert types, and set a custom message or mention whenever you
               like. Each command opens a form with your current settings.
             </p>
           </li>
@@ -67,7 +67,7 @@ export function Setup() {
             <p className="eyebrow">Custom message</p>
             <h3 className="template-title">Say it your way</h3>
             <p className="template-copy">
-              Set this with <code>/disconotify account-set-message</code>, for every alert or just one type. Leave it
+              Set this with <code>/notify account-set-message</code>, for every alert or just one type. Leave it
               empty to go back to the default. Unknown placeholders are left as plain text, so a typo never breaks an
               alert.
             </p>

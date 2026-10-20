@@ -9,7 +9,7 @@ Everything that needs a secret (signed links, Discord login, Polar checkout, cry
 | Route            | File                          | What it is                                                              |
 | ---------------- | ----------------------------- | ----------------------------------------------------------------------- |
 | `/`              | `app/page.tsx`                | Homepage: platforms, comparison, features, setup, commands, pricing, FAQ |
-| `/subscribe`     | `app/subscribe/page.tsx`      | Signed-link page from `/disconotify subscribe`, or Discord login and server list |
+| `/subscribe`     | `app/subscribe/page.tsx`      | Signed-link page from `/notify subscribe`, or Discord login and server list |
 | `/auth/callback` | `app/auth/callback/page.tsx`  | Where Discord sends people back after login                             |
 | `/thanks`        | `app/thanks/page.tsx`         | Payment result: success, warning or error, then "Activating your server…" |
 | `/manage`        | `app/manage/page.tsx`         | How to cancel, refunds, support                                         |
@@ -22,7 +22,7 @@ Homepage sections live in `components/home/`, the subscribe flow in `components/
 ## How payments work
 
 ```
-/disconotify subscribe ──► signed link ──► /subscribe?t=…        (or: Log in with Discord → pick a server)
+/notify subscribe ──► signed link ──► /subscribe?t=…        (or: Log in with Discord → pick a server)
                                                 │
                                    billing function (Supabase)
                                                 │

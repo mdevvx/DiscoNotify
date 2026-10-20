@@ -50,7 +50,7 @@ export function Subscribe() {
   useEffect(() => {
     let cancelled = false;
     const run = async () => {
-      // A signed link from /disconotify subscribe. Take the token out of the address bar right away.
+      // A signed link from /notify subscribe. Take the token out of the address bar right away.
       const fromUrl = new URLSearchParams(window.location.search).get("t");
       if (fromUrl) {
         store.setLink(fromUrl);
@@ -132,7 +132,7 @@ export function Subscribe() {
         <div className="plan">
           {!site.billingApi ? (
             <Alert tone="warning" title="Payments aren't set up yet">
-              Subscribing opens soon. Meanwhile run <code>/disconotify subscribe</code> in your server.
+              Subscribing opens soon. Meanwhile run <code>/notify subscribe</code> in your server.
             </Alert>
           ) : view.mode === "loading" ? (
             <p className="status-line" role="status">
@@ -159,6 +159,7 @@ export function Subscribe() {
                 auth={{ session: view.session.session, guild_id: view.chosen.id }}
                 info={{
                   name: view.chosen.name,
+                  guild: view.chosen,
                   trialDays: view.chosen.trial_days,
                   cardActive: view.chosen.card_active,
                   price: view.session.price_usd,
@@ -206,7 +207,7 @@ export function Subscribe() {
 
               {view.notice === "expired" && (
                 <Alert tone="warning" title="This link has expired">
-                  Run <code>/disconotify subscribe</code> in your server for a new one, or log in with Discord below.
+                  Run <code>/notify subscribe</code> in your server for a new one, or log in with Discord below.
                 </Alert>
               )}
               {error && <Alert tone="error" title="That didn't work">{error}</Alert>}
@@ -257,7 +258,7 @@ function ServerPicker({
           {!picked.bot
             ? "DiscoNotify isn't in this server yet. Add it first, then come back."
             : picked.card_active
-            ? "Already subscribed. Manage it with /disconotify cancel in Discord."
+            ? "Already subscribed. Manage it with /notify cancel in Discord."
             : stateText(picked)}
         </p>
       )}

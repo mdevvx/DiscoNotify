@@ -125,7 +125,7 @@ const sections: LegalSection[] = [
                     <li>
                         <strong>Cancellation:</strong> You can cancel a card
                         subscription at any time with{" "}
-                        <code>/disconotify cancel</code> in Discord or from our{" "}
+                        <code>/notify cancel</code> in Discord or from our{" "}
                         <Link href="/manage">Manage or cancel</Link> page. Your
                         subscription stays active until the end of the month you
                         have paid for and is not charged again. Crypto plans
@@ -425,7 +425,7 @@ const sections: LegalSection[] = [
                 <p>
                     You can stop using DiscoNotify at any time by removing it
                     from your server. You can stop following individual accounts
-                    with <code>/disconotify account-remove</code>. What happens
+                    with <code>/notify account-remove</code>. What happens
                     to your server's data afterwards is explained in our{" "}
                     <Link href="/privacy#retention">Privacy Policy</Link>.
                 </p>

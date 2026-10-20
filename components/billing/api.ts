@@ -17,8 +17,10 @@ export async function api<T>(body: Record<string, unknown>): Promise<T> {
       body: JSON.stringify(body),
       credentials: "omit",
       referrerPolicy: "no-referrer",
+      signal: AbortSignal.timeout(30_000),
     });
-  } catch {
+  } catch (err) {
+    if ((err as Error).name === "TimeoutError") throw new ApiError("The server took too long to answer. Please try again.", "timeout");
     throw new ApiError("We couldn't reach the server. Check your connection and try again.", "network");
   }
   const json = await res.json().catch(() => ({}));
