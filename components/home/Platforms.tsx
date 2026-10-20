@@ -81,7 +81,7 @@ const notes = [
         title: "Instagram",
         color: "var(--ig)",
         text: "Works with public Business and Creator accounts.",
-        limits: "Personal accounts, Stories and Instagram Live (not available in official API).",
+        limits: "Personal accounts, Stories and Instagram Live.",
     },
     {
         title: "X (Twitter)",
