@@ -110,9 +110,7 @@ export function PayPanel({ auth, info, onBack }: { auth: Auth; info: PayInfo; on
       <div className="server-chip">
         <span style={{ display: "flex", alignItems: "center", gap: "0.6rem", minWidth: 0 }}>
           {info.guild && <ServerIcon g={info.guild} size={28} />}
-          <span>
-            Server <strong>{info.name || "your server"}</strong>
-          </span>
+          <strong>{info.name || "your server"}</strong>
         </span>
         {onBack && (
           <button type="button" className="link-btn" onClick={onBack}>
