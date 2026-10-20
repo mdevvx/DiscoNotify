@@ -1,0 +1,4 @@
+# Only the website billing function lives here; the database is managed by the bot's migrations.
+# The function checks every request itself, so it doesn't need a Supabase login token.
+[functions.billing]
+verify_jwt = false
