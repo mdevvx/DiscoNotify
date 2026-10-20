@@ -28,7 +28,7 @@ Homepage sections live in `components/home/`, the subscribe flow in `components/
                                                 │
                     card: Polar checkout ───────┴─────── crypto: NOWPayments address
                        │                                         │
-                  /thanks (asks Polar)                  row in pulsenotify_payments
+                  /thanks (asks Polar)                  row in notify_payments
                        │                                         │
                        └──► the bot confirms with the provider (≤ 1 min) and switches the server on
 ```
@@ -42,9 +42,9 @@ Copy `.env.example` to `.env.local`. These are public values, safe to ship in th
 
 | Variable                        | Example                                          |
 | ------------------------------- | ------------------------------------------------ |
-| `NEXT_PUBLIC_SITE_URL`          | `https://pulsenotify.duoplus.org`                |
+| `NEXT_PUBLIC_SITE_URL`          | `https://disconotify.com`                |
 | `NEXT_PUBLIC_DISCORD_CLIENT_ID` | Your bot's application ID                        |
-| `NEXT_PUBLIC_SUPPORT_EMAIL`     | `support@duoplus.org`                            |
+| `NEXT_PUBLIC_SUPPORT_EMAIL`     | `support@disconotify.com`                            |
 | `NEXT_PUBLIC_SUPPORT_SERVER`    | `https://discord.gg/abc123`                      |
 | `NEXT_PUBLIC_LEGAL_NAME`        | Your exact legal name or company                 |
 | `NEXT_PUBLIC_LEGAL_ADDRESS`     | City, country (or full address)                  |
@@ -60,7 +60,7 @@ Supabase automatically.
 
 | Secret                                  | Value                                                                                     |
 | --------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `SITE_URL`                              | `https://pulsenotify.duoplus.org` (also the only origin allowed to call the function)    |
+| `SITE_URL`                              | `https://disconotify.com` (also the only origin allowed to call the function)    |
 | `ALLOWED_ORIGINS`                       | Optional extra origins, comma separated (e.g. `http://localhost:3000` while developing)   |
 | `BILLING_LINK_SECRET`                   | The **same** long random string as the bot's `BILLING_LINK_SECRET`                        |
 | `POLAR_WEB_TOKEN`                       | A separate Polar organization token with only `checkouts:write` and `checkouts:read`      |
@@ -76,7 +76,7 @@ Make the random strings with `python -c "import secrets; print(secrets.token_url
 ```bash
 npx supabase login
 npx supabase link --project-ref YOUR_PROJECT_REF
-npx supabase secrets set SITE_URL=https://pulsenotify.duoplus.org BILLING_LINK_SECRET=... SESSION_SECRET=... \
+npx supabase secrets set SITE_URL=https://disconotify.com BILLING_LINK_SECRET=... SESSION_SECRET=... \
   POLAR_WEB_TOKEN=... POLAR_PRODUCT_ID=... DISCORD_CLIENT_ID=... DISCORD_CLIENT_SECRET=... \
   NOWPAYMENTS_API_KEY=... BILLING_PRICE_USD=2.99 BILLING_TRIAL_DAYS=7 BILLING_GRACE_DAYS=3
 npx supabase functions deploy billing --no-verify-jwt --use-api
@@ -88,10 +88,10 @@ session) and never relies on a Supabase login. Run the commands from this projec
 ## One-time setup checklist
 
 1. **Bot database:** run the bot's migrations `0006`, `0008`, `0009` and `0010` in the Supabase SQL editor.
-2. **Discord developer portal** → your application → OAuth2 → Redirects: add `https://pulsenotify.duoplus.org/auth/callback`.
+2. **Discord developer portal** → your application → OAuth2 → Redirects: add `https://disconotify.com/auth/callback`.
 3. **Polar:** create a separate organization token for the website (`checkouts:write`, `checkouts:read` only), not the
    bot's token (which can open billing portals).
-4. **Bot environment:** `BILLING_SUBSCRIBE_URL=https://pulsenotify.duoplus.org/subscribe` and the same
+4. **Bot environment:** `BILLING_SUBSCRIBE_URL=https://disconotify.com/subscribe` and the same
    `BILLING_LINK_SECRET` as the function. Then `BILLING_ENABLED=true`, redeploy the bot and run `!sync`.
 5. Deploy the function (above), set the website variables, push to rebuild the site.
 6. **Test in the sandbox first** (`POLAR_SANDBOX=true`, a sandbox token and product), then switch to live values.

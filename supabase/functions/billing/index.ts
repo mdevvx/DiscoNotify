@@ -80,7 +80,7 @@ const MAX_BODY = 8_000;
 const DAY = 86_400_000;
 
 const db = createClient(env("SUPABASE_URL"), env("SUPABASE_SERVICE_ROLE_KEY"), {
-  db: { schema: "pulsenotify" },
+  db: { schema: "disconotify" },
   auth: { persistSession: false, autoRefreshToken: false },
 });
 
@@ -135,7 +135,7 @@ async function botPresent(ids: string[]): Promise<Set<string>> {
   const present = new Set<string>();
   for (let i = 0; i < ids.length; i += 100) {
     const { data, error } = await db
-      .from("pulsenotify_guilds")
+      .from("notify_guilds")
       .select("gid:guild_id::text")
       .in("guild_id", ids.slice(i, i + 100))
       .eq("bot_present", true);
@@ -149,7 +149,7 @@ async function billingRows(ids: string[]): Promise<Map<string, BillingRow>> {
   const rows = new Map<string, BillingRow>();
   for (let i = 0; i < ids.length; i += 100) {
     const { data, error } = await db
-      .from("pulsenotify_billing")
+      .from("notify_billing")
       .select(`gid:guild_id::text, ${BILLING_COLUMNS}`)
       .in("guild_id", ids.slice(i, i + 100));
     if (error) throw error;
@@ -445,7 +445,7 @@ async function crypto_(body: Record<string, unknown>) {
 
   const since = new Date(Date.now() - 3_600_000).toISOString();
   const { count, error: countError } = await db
-    .from("pulsenotify_payments")
+    .from("notify_payments")
     .select("id", { count: "exact", head: true })
     .eq("guild_id", who.guildId)
     .eq("provider", "nowpayments")
@@ -480,7 +480,7 @@ async function crypto_(body: Record<string, unknown>) {
   });
 
   const { data, error } = await db
-    .from("pulsenotify_payments")
+    .from("notify_payments")
     .insert({
       guild_id: who.guildId,
       provider: "nowpayments",
@@ -519,7 +519,7 @@ async function cryptoStatus(body: Record<string, unknown>) {
   const id = str(body.id, 40);
   if (!UUID.test(id)) throw new HttpError(400, GENERIC, "bad_request");
   const { data, error } = await db
-    .from("pulsenotify_payments")
+    .from("notify_payments")
     .select("status, provider, external_id, gid:guild_id::text")
     .eq("id", id)
     .eq("provider", "nowpayments")
@@ -552,7 +552,7 @@ async function contact(body: Record<string, unknown>) {
   if (!EMAIL.test(email)) throw new HttpError(400, "Enter a valid email address.", "bad_email");
   await requireBot(who.guildId);
 
-  const { error } = await db.from("pulsenotify_contact_emails").upsert(
+  const { error } = await db.from("notify_contact_emails").upsert(
     { guild_id: who.guildId, email, discord_user_id: who.userId ?? null, updated_at: new Date().toISOString() },
     { onConflict: "guild_id" },
   );
@@ -578,7 +578,7 @@ async function status() {
     let on = false;
     try {
       const { data, error } = await db
-        .from("pulsenotify_bot_state")
+        .from("notify_bot_state")
         .select("value")
         .eq("key", "maintenance_mode")
         .maybeSingle();
