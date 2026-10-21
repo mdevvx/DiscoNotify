@@ -11,8 +11,8 @@
   --ink-2: #434759;
   --ink-3: #636880;
   --line: #c9cddb;
-  --signal: #5865f2;          /* the "live" accent, used sparingly */
-  --signal-soft: #e8eafd;
+  --signal: #e23748;          /* brand red, matches the logo */
+  --signal-soft: #fde8eb;
   --ok: #1f8a5b;
   --wait: #a86a06;
   --no: #8b8fa3;
@@ -29,7 +29,7 @@
   --yt: #ff0033;
   --kick: #3bc10e;
   --ig: #d62976;
-  --discord: #5865f2;
+  --discord: #e23748;           /* brand accent for the Add to Discord buttons and community panel */
 
   /* Type */
   --font-display: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
@@ -58,8 +58,8 @@
     --ink-2: #b3b7c9;
     --ink-3: #868aa0;
     --line: #2a2f3e;
-    --signal: #7983f5;
-    --signal-soft: #1e2145;
+    --signal: #f2566a;
+    --signal-soft: #3a1520;
     --ok: #4cc58c;
     --wait: #e0a43a;
     --no: #6f7389;
@@ -80,8 +80,8 @@
   --ink-2: #b3b7c9;
   --ink-3: #868aa0;
   --line: #2a2f3e;
-  --signal: #7983f5;
-  --signal-soft: #1e2145;
+  --signal: #f2566a;
+  --signal-soft: #3a1520;
   --ok: #4cc58c;
   --wait: #e0a43a;
   --no: #6f7389;
@@ -371,10 +371,10 @@ code, kbd { font-family: var(--font-mono); font-size: 0.9em; }
   padding: clamp(2rem, 5vw, 3.25rem);
   border-radius: 20px; color: #fff;
   background:
-    radial-gradient(120% 140% at 100% 0%, rgba(139, 150, 255, 0.7) 0%, transparent 55%),
-    radial-gradient(100% 120% at 0% 100%, rgba(88, 101, 242, 0.85) 0%, transparent 60%),
-    #5865f2;
-  box-shadow: 0 30px 70px -40px rgba(88, 101, 242, 0.8);
+    radial-gradient(120% 140% at 100% 0%, rgba(255, 138, 150, 0.7) 0%, transparent 55%),
+    radial-gradient(100% 120% at 0% 100%, rgba(201, 42, 60, 0.9) 0%, transparent 60%),
+    #e23748;
+  box-shadow: 0 30px 70px -40px rgba(226, 55, 72, 0.8);
 }
 .cta-card::after {
   content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0.18;
@@ -471,7 +471,7 @@ button.btn { cursor: pointer; font-family: inherit; }
 .btn-lg { padding: 0.85rem 1.35rem; font-size: 1rem; border-radius: 10px; }
 .btn-sm { padding: 0.5rem 0.85rem; font-size: 0.85rem; }
 .btn-discord { background: var(--discord); color: #fff; box-shadow: 0 10px 24px -14px var(--discord); }
-.btn-discord:hover { background: #4752c4; }
+.btn-discord:hover { background: #c92a3c; }
 .btn-light { background: #fff; color: #161823; box-shadow: 0 12px 28px -14px rgba(0, 0, 0, 0.5); }
 .btn svg { flex: none; }
 
@@ -652,7 +652,7 @@ button.btn { cursor: pointer; font-family: inherit; }
 .community li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--discord); flex: none; }
 .community-art {
   display: grid; place-items: center; width: 200px; aspect-ratio: 1; border-radius: 40px;
-  color: #fff; background: linear-gradient(145deg, #7983f5, var(--discord));
+  color: #fff; background: linear-gradient(145deg, #f2566a, var(--discord));
   box-shadow: 0 30px 60px -30px var(--discord);
   transform: rotate(-6deg);
 }
@@ -826,10 +826,10 @@ html, body { overflow-x: clip; }
 /* ---------- Comparison ---------- */
 .cmp { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .cmp-col { padding: 1.6rem; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); min-width: 0; }
-.cmp-us { border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); background: linear-gradient(180deg, color-mix(in srgb, var(--ok) 7%, var(--surface)), var(--surface)); }
+.cmp-us { border-color: color-mix(in srgb, var(--ink) 30%, var(--line)); background: var(--surface); }
 .cmp-title { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
 .cmp-them .cmp-title { text-decoration-color: var(--signal); }
-.cmp-us .cmp-title { text-decoration-color: var(--ok); }
+.cmp-us .cmp-title { text-decoration-color: var(--ink); }
 .cmp-sub { margin-top: 0.7rem; color: var(--ink-3); font-size: 0.95rem; }
 .cmp ul { list-style: none; padding: 0; margin: 1.4rem 0 0; display: grid; gap: 1rem; }
 .cmp li { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 1rem; line-height: 1.4; }
@@ -965,10 +965,10 @@ html { scrollbar-width: auto; scrollbar-color: var(--signal) var(--bg); }
    Refined depth, rhythm and interaction states. Overrides earlier rules by order.
    ========================================================================== */
 :root {
-  --grad-signal: linear-gradient(135deg, #7983f5 0%, #5865f2 55%, #4752c4 100%);
+  --grad-signal: linear-gradient(135deg, #f2566a 0%, #e23748 55%, #c92a3c 100%);
   --shadow-sm: 0 1px 2px rgba(20, 22, 40, 0.06), 0 6px 16px -10px rgba(20, 22, 40, 0.25);
   --shadow-md: 0 2px 4px rgba(20, 22, 40, 0.05), 0 22px 44px -26px rgba(20, 22, 40, 0.4);
-  --shadow-lg: 0 4px 8px rgba(20, 22, 40, 0.05), 0 40px 80px -40px rgba(40, 50, 120, 0.5);
+  --shadow-lg: 0 4px 8px rgba(20, 22, 40, 0.05), 0 40px 80px -40px rgba(160, 30, 50, 0.45);
   --ring: 0 0 0 3px color-mix(in srgb, var(--signal) 28%, transparent);
   --ease: cubic-bezier(.2, .8, .2, 1);
 }
@@ -976,13 +976,13 @@ html { scrollbar-width: auto; scrollbar-color: var(--signal) var(--bg); }
   :root:not([data-theme="light"]) {
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 16px -10px rgba(0, 0, 0, 0.6);
     --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.35), 0 22px 44px -26px rgba(0, 0, 0, 0.8);
-    --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.35), 0 40px 80px -40px rgba(88, 101, 242, 0.45);
+    --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.35), 0 40px 80px -40px rgba(226, 55, 72, 0.4);
   }
 }
 :root[data-theme="dark"] {
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 16px -10px rgba(0, 0, 0, 0.6);
   --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.35), 0 22px 44px -26px rgba(0, 0, 0, 0.8);
-  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.35), 0 40px 80px -40px rgba(88, 101, 242, 0.45);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.35), 0 40px 80px -40px rgba(226, 55, 72, 0.4);
 }
 
 ::selection { background: color-mix(in srgb, var(--signal) 30%, transparent); }
@@ -1010,7 +1010,7 @@ html { scrollbar-width: auto; scrollbar-color: var(--signal) var(--bg); }
 /* Hero */
 .hero { padding-block: clamp(3.5rem, 9vw, 7rem) clamp(2.5rem, 5vw, 4rem); }
 .hero h1 { font-size: clamp(2.6rem, 6vw, 4.5rem); line-height: 1.02; }
-.hero h1 em { background: linear-gradient(95deg, #7983f5 0%, #5865f2 40%, #e0557e 100%); -webkit-background-clip: text; background-clip: text; }
+.hero h1 em { background: linear-gradient(95deg, #f2566a 0%, #e23748 45%, #ff8a4c 100%); -webkit-background-clip: text; background-clip: text; }
 .lede { line-height: 1.65; }
 .hero-badge { box-shadow: var(--shadow-sm); }
 .facts { box-shadow: var(--shadow-md); backdrop-filter: blur(8px); }
@@ -1064,7 +1064,7 @@ html { scrollbar-width: auto; scrollbar-color: var(--signal) var(--bg); }
   border: 1.5px solid transparent;
   background:
     linear-gradient(var(--surface), var(--surface)) padding-box,
-    linear-gradient(145deg, color-mix(in srgb, var(--signal) 70%, transparent), var(--line) 45%, color-mix(in srgb, #e0557e 50%, transparent)) border-box;
+    linear-gradient(145deg, color-mix(in srgb, var(--signal) 70%, transparent), var(--line) 45%, color-mix(in srgb, #ff8a4c 55%, transparent)) border-box;
 }
 .plan-price { background: var(--grad-signal); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .plan-price .per { -webkit-text-fill-color: var(--ink-3); }
@@ -1086,7 +1086,7 @@ html { scrollbar-width: auto; scrollbar-color: var(--signal) var(--bg); }
 
 /* Community + CTA */
 .community { box-shadow: var(--shadow-md); }
-.cta-card { box-shadow: 0 40px 90px -44px rgba(88, 101, 242, 0.9); border-radius: 24px; }
+.cta-card { box-shadow: 0 40px 90px -44px rgba(226, 55, 72, 0.9); border-radius: 24px; }
 .cta h2 { letter-spacing: -0.03em; }
 
 /* Footer */
@@ -1201,3 +1201,25 @@ html.js .reveal.in { transform: none; }
 
 @media (max-width: 860px) { .pay-grid { grid-template-columns: 1fr; } .pay::before { display: none; } }
 @media (max-width: 420px) { .stepper-label { font-size: 0.72rem; } .flow-card { border-radius: 16px; } }
+
+/* ==========================================================================
+   Flatter look: shadows kept very light, no coloured glows (focus rings stay)
+   ========================================================================== */
+:root, :root[data-theme="dark"] {
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+    --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+.dc, .plan, .code-card, .facts, .menu-panel, .select-pop { box-shadow: var(--shadow-md); }
+.btn-primary, .btn-discord, .btn-light, .btn-light:hover, .btn-primary:hover { box-shadow: none; }
+.hero-badge, .tab[aria-selected="true"] { box-shadow: var(--shadow-sm); }
+.feature:hover, .step:hover { box-shadow: var(--shadow-sm); }
+.feature-icon, .step::before, .plan-ribbon, .community-art, .cta-card, .stepper-item[data-state="current"] .stepper-dot, .choice input:checked + span { box-shadow: none; }
+.stepper-item[data-state="current"] .stepper-dot { border-color: transparent; }
