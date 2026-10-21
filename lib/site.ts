@@ -25,7 +25,7 @@ export const site = {
   supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "support@yourdomain.com",
   supportServer: process.env.NEXT_PUBLIC_SUPPORT_SERVER || "https://discord.gg/nwSDAtjNZD",
   price: {
-    amount: 2.99,
+    amount: 1.99,
     currency: "$",
     period: "month",
     trialDays: 7,

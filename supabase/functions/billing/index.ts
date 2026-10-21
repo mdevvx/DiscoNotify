@@ -42,7 +42,7 @@ const positive = (key: string, fallback: number) => {
 };
 
 // Keep these equal to the bot's settings.
-const PRICE_USD = positive("BILLING_PRICE_USD", 2.99);
+const PRICE_USD = positive("BILLING_PRICE_USD", 1.99);
 const TRIAL_DAYS = Math.trunc(positive("BILLING_TRIAL_DAYS", 7));
 const GRACE_DAYS = Math.trunc(positive("BILLING_GRACE_DAYS", 3));
 

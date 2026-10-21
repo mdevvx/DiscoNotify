@@ -69,7 +69,7 @@ Supabase automatically.
 | `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET` | The bot's Discord application (OAuth2 page)                                          |
 | `SESSION_SECRET`                        | A second long random string for signing login sessions                                    |
 | `NOWPAYMENTS_API_KEY`                   | Live NOWPayments key, for crypto                                                          |
-| `BILLING_PRICE_USD`, `BILLING_TRIAL_DAYS`, `BILLING_GRACE_DAYS` | `2.99`, `7`, `3`, equal to the bot's settings                     |
+| `BILLING_PRICE_USD`, `BILLING_TRIAL_DAYS`, `BILLING_GRACE_DAYS` | `1.99`, `7`, `3`, equal to the bot's settings                     |
 
 Make the random strings with `python -c "import secrets; print(secrets.token_urlsafe(48))"`.
 
@@ -78,7 +78,7 @@ npx supabase login
 npx supabase link --project-ref YOUR_PROJECT_REF
 npx supabase secrets set SITE_URL=https://disconotify.com BILLING_LINK_SECRET=... SESSION_SECRET=... \
   POLAR_WEB_TOKEN=... POLAR_PRODUCT_ID=... DISCORD_CLIENT_ID=... DISCORD_CLIENT_SECRET=... \
-  NOWPAYMENTS_API_KEY=... BILLING_PRICE_USD=2.99 BILLING_TRIAL_DAYS=7 BILLING_GRACE_DAYS=3
+  NOWPAYMENTS_API_KEY=... BILLING_PRICE_USD=1.99 BILLING_TRIAL_DAYS=7 BILLING_GRACE_DAYS=3
 npx supabase functions deploy billing --no-verify-jwt --use-api
 ```
 
