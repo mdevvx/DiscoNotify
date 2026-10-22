@@ -13,7 +13,7 @@ const faqs: { q: string; a: ReactNode }[] = [
   },
   {
     q: "How does the free trial work?",
-    a: `Every server gets ${site.price.trialDays} days free from the moment DiscoNotify joins, with no card needed. If you subscribe by card during the trial, you aren't charged until the trial ends, and cancelling before then means you're never charged.`,
+    a: `Every server gets ${site.price.trialDays} days free, with no card needed. After you add the bot, activate your trial with a quick Discord login on our website and alerts switch on right away. If you subscribe by card during the trial, you aren't charged until the trial ends, and cancelling before then means you're never charged.`,
   },
   {
     q: "Can I pay with crypto?",

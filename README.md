@@ -132,3 +132,12 @@ Add the website variables under Settings > Secrets and variables > Actions > Var
 
 Polar's account review needs a live website with your pricing, Terms, Privacy and Refund pages (all linked from the
 footer), your legal name and a support email. This site covers all of those once the settings above are filled in.
+
+
+## Trial activation and email pages
+
+New servers start their free trial on `/activate` (Discord login with the `email` scope, then the `activate` action of the billing function, which calls `notify_activate_trial`). `/unsubscribe?t=...` is the reminder emails' link. Before deploying:
+
+1. Run the bot's `0013_email_and_trial_activation.sql` migration. The billing function reads `notify_billing.activation_required` and writes `notify_email_contacts`; it errors until that exists.
+2. `supabase functions deploy billing`. `BILLING_TRIAL_DAYS` (already a secret) is passed as the trial length, so keep it equal to the bot's.
+3. For one-click unsubscribe, the bot's `List-Unsubscribe` header should point at the function: `https://<project-ref>.supabase.co/functions/v1/billing?unsub=<token>` (mail apps POST there without an Origin header, which the function allows only for this case). The visible link in the email stays `https://<your-site>/unsubscribe?t=<token>`.

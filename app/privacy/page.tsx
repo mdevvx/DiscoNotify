@@ -83,11 +83,12 @@ const sections: LegalSection[] = [
         <p>Your name, billing address and card details are collected and processed by Polar, not by us. Crypto payments are processed by NOWPayments, and we receive only the payment details above. Both providers share only what we need with us.</p>
 
         <h3>Logging in with Discord</h3>
-        <p>On the subscribe page you can log in with Discord instead of using a link from the bot. We ask Discord for two permissions only: <strong>identify</strong> (your Discord ID and name) and <strong>guilds</strong> (the list of servers you are in). We use them for one thing: to show you the servers you manage that DiscoNotify is in, and to tie your payment to your Discord ID.</p>
+        <p>On the subscribe and activation pages you can log in with Discord instead of using a link from the bot. We ask Discord for up to three permissions: <strong>identify</strong> (your Discord ID and name), <strong>guilds</strong> (the list of servers you are in) and, on the activation page only, <strong>email</strong> (the email address Discord has verified for you). We use them to show you the servers you manage that DiscoNotify is in, to start your free trial, to tie your payment to your Discord ID and to contact you about your subscription.</p>
         <ul>
           <li>The Discord access token is used for those two requests and then revoked straight away. We never store it.</li>
           <li>We don't store your list of servers. After login, the page keeps a short-lived, signed session in your browser tab for about 30 minutes. It holds your Discord ID, your name and the IDs of the servers you may subscribe, and it's cleared when you close the tab or log out.</li>
           <li>The login can't post messages, read messages, or change anything in your servers or account.</li>
+          <li>Emails are kept while your server uses the service and deleted on request. They are processed by the mail provider we use to send email from disconotify.com. Billing emails (receipts, failed payments, cancellations) can&apos;t be unsubscribed from while a subscription exists. Reminder emails can, with the link in each one.</li>
         </ul>
 
 <h3>Legal basis</h3>

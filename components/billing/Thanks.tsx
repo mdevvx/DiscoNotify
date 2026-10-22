@@ -9,7 +9,7 @@ import { api, longDate } from "./api";
 type Outcome =
   | { kind: "loading" }
   | { kind: "none" }
-  | { kind: "result"; status: string; trialEnd: string | null };
+  | { kind: "result"; status: string; trialEnd: string | null; email: string | null };
 
 const POLL_EVERY = 5_000;
 const POLL_FOR = 2 * 60_000;
@@ -24,9 +24,9 @@ export function Thanks() {
     const id = new URLSearchParams(window.location.search).get("checkout_id") || "";
     if (!id) return setOutcome({ kind: "none" });
     setCheckoutId(id);
-    api<{ status: string; trial_end: string | null }>({ action: "thanks", checkout_id: id })
-      .then((r) => setOutcome({ kind: "result", status: r.status, trialEnd: r.trial_end }))
-      .catch(() => setOutcome({ kind: "result", status: "error", trialEnd: null }));
+    api<{ status: string; trial_end: string | null; email: string | null }>({ action: "thanks", checkout_id: id })
+      .then((r) => setOutcome({ kind: "result", status: r.status, trialEnd: r.trial_end, email: r.email }))
+      .catch(() => setOutcome({ kind: "result", status: "error", trialEnd: null, email: null }));
   }, []);
 
   const succeeded = outcome.kind === "result" && outcome.status === "succeeded";
@@ -74,6 +74,7 @@ export function Thanks() {
         <Alert tone="success" title="Payment received">
           Your server will be switched on within about 2 minutes, and the bot confirms in your Discord channel.
           {outcome.trialEnd && <> Your card is saved. The first charge is on {longDate(outcome.trialEnd)}.</>}
+          {outcome.email && <> A confirmation email is on its way to <strong>{outcome.email}</strong>.</>}
         </Alert>
         {active === "waiting" && (
           <p className="status-line" role="status">

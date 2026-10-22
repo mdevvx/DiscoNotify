@@ -81,7 +81,7 @@ export function PayPanel({ auth, info, onBack }: { auth: Auth; info: PayInfo; on
     setError("");
     if (!(await saveEmail())) return setBusy(false);
     try {
-      const { url } = await api<{ url: string }>({ action: "checkout", ...auth });
+      const { url } = await api<{ url: string }>({ action: "checkout", ...auth, email: email.trim() });
       goToPolar(url);
     } catch (err) {
       const code = err instanceof ApiError ? err.code : "";

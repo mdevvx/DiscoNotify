@@ -63,12 +63,14 @@ export type StoredSession = {
   price_usd: number;
   card: boolean;
   crypto: boolean;
+  email?: string; // Discord-verified email, only for logins made to activate a trial
   exp: number; // ms
 };
 
 const SESSION_KEY = "pn_session";
 const LINK_KEY = "pn_link";
 const NONCE_KEY = "pn_nonce";
+const PURPOSE_KEY = "pn_purpose";
 
 function read(key: string): string | null {
   try {
@@ -112,6 +114,10 @@ export const store = {
   nonce: () => read(NONCE_KEY),
   setNonce: (n: string) => write(NONCE_KEY, n),
   clearNonce: () => drop(NONCE_KEY),
+  // Which page asked for the Discord login, so the callback sends people back to it.
+  purpose: (): "subscribe" | "activate" => (read(PURPOSE_KEY) === "activate" ? "activate" : "subscribe"),
+  setPurpose: (p: "subscribe" | "activate") => write(PURPOSE_KEY, p),
+  clearPurpose: () => drop(PURPOSE_KEY),
 };
 
 export function newNonce(): string {

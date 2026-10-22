@@ -46,6 +46,9 @@ export default function ManagePage() {
                   subscription. Cancelled during the free trial? You&apos;re never charged.
                 </p>
                 {portal && (
+                  <p className="field-help">You&apos;ll manage your subscription on Polar, our payment provider.</p>
+                )}
+                {portal && (
                   <a className="btn btn-ghost btn-lg plan-cta" href={portal} rel="noopener" target="_blank">
                     Open the customer portal
                   </a>

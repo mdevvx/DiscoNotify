@@ -25,7 +25,7 @@ export function Pricing() {
           <h2>One plan. Everything included.</h2>
           <p>
             Every feature and every supported platform for one flat price per server. Each server starts with a{" "}
-            {trialDays}-day free trial the moment DiscoNotify joins, with no card needed.
+            {trialDays}-day free trial you start with a quick Discord login, with no card needed.
           </p>
 
           <div className="pay-ways">

@@ -112,17 +112,41 @@ export async function verifyState(state: unknown, nonce: unknown, secret: string
   return data.n === (await sha256Hex(nonce));
 }
 
-export type Session = { u: string; n: string; g: string[]; e: number };
+/** `m` is the Discord-verified email, only present for logins made for trial activation. */
+export type Session = { u: string; n: string; g: string[]; e: number; m?: string };
 
-export async function makeSession(user: { id: string; name: string }, guildIds: string[], secret: string) {
-  return seal({ v: 1, u: user.id, n: user.name.slice(0, 80), g: guildIds, e: nowSeconds() + SESSION_TTL }, secret, SESSION_LABEL);
+export async function makeSession(user: { id: string; name: string }, guildIds: string[], secret: string, email?: string) {
+  return seal(
+    { v: 1, u: user.id, n: user.name.slice(0, 80), g: guildIds, e: nowSeconds() + SESSION_TTL, ...(email && { m: email }) },
+    secret,
+    SESSION_LABEL,
+  );
 }
 
 export async function verifySession(token: unknown, secret: string): Promise<Session | null> {
   const data = await openSigned(token, secret, SESSION_LABEL);
   if (!data || data.v !== 1 || !isDiscordId(data.u) || typeof data.e !== "number" || data.e < nowSeconds()) return null;
   if (!Array.isArray(data.g) || !data.g.every(isDiscordId)) return null;
-  return { u: data.u, n: String(data.n ?? ""), g: data.g as string[], e: data.e };
+  return {
+    u: data.u,
+    n: String(data.n ?? ""),
+    g: data.g as string[],
+    e: data.e,
+    m: typeof data.m === "string" ? data.m : undefined,
+  };
+}
+
+// ── unsubscribe links from the bot's emails ───────────────────────────────
+// {"v":1,"k":"unsub","e":"<email>","g":"<server id>","x":<expiry unix s>}, signed like the subscribe links.
+
+export type UnsubData = { e: string; g: string; x: number };
+
+export async function verifyUnsub(token: unknown, secret: string): Promise<UnsubData | null> {
+  const data = await openSigned(token, secret, "");
+  if (!data || data.v !== 1 || data.k !== "unsub" || !isDiscordId(data.g)) return null;
+  if (typeof data.x !== "number" || data.x < nowSeconds()) return null;
+  if (typeof data.e !== "string" || data.e.length > 254 || !data.e.includes("@")) return null;
+  return { e: data.e.trim().toLowerCase(), g: data.g, x: data.x };
 }
 
 // ── Discord permissions: owner, Manage Server or Administrator (same rule as the bot) ──

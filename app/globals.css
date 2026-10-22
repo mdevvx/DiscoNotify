@@ -1228,3 +1228,16 @@ html.js .reveal.in { transform: none; }
 .btn-brand { background: var(--grad-signal); color: #fff; }
 .btn-brand:hover { background: #c92a3c; }
 .site-footer .brand { color: var(--ink); }
+
+/* Activation: server list, unsubscribe page */
+.server-list { display: grid; gap: 0.5rem; }
+.server-option {
+  display: flex; align-items: center; gap: 0.8rem; width: 100%; text-align: left; min-width: 0;
+  font: inherit; color: var(--ink); cursor: pointer; padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--bg);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.server-option:hover { border-color: color-mix(in srgb, var(--signal) 45%, var(--line)); }
+.server-option[aria-checked="true"] { border-color: var(--signal); background: var(--signal-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--signal) 20%, transparent); }
+.server-option:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+.unsub-title { font-size: var(--step-2); letter-spacing: -0.025em; }

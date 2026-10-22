@@ -92,9 +92,11 @@ const sections: LegalSection[] = [
                         by Polar at checkout.
                     </li>
                     <li>
-                        <strong>Free trial:</strong> Each server starts with a{" "}
+                        <strong>Free trial:</strong> Each server can start a{" "}
                         {site.price.trialDays}-day free trial that needs no
-                        payment details. If you subscribe by card during the
+                        payment details. The trial starts when you activate it
+                        on our website, and a server that hasn't activated has
+                        no alerts. If you subscribe by card during the
                         trial, your card is saved and nothing is charged until
                         the trial ends. If you cancel before then, you are not
                         charged.

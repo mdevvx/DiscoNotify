@@ -10,6 +10,7 @@ type LoginResult = {
   session: string;
   user: { id: string; name: string };
   guilds: Guild[];
+  email?: string;
   price_usd: number;
   card: boolean;
   crypto: boolean;
@@ -18,6 +19,8 @@ type LoginResult = {
 /** Discord sends people back here with ?code&state. The code is single-use and leaves the address bar at once. */
 export function AuthCallback() {
   const [problem, setProblem] = useState<"cancelled" | "failed" | null>(null);
+  const [message, setMessage] = useState("");
+  const [back, setBack] = useState("/subscribe");
   const started = useRef(false);
 
   useEffect(() => {
@@ -29,18 +32,30 @@ export function AuthCallback() {
     const state = params.get("state");
     const denied = params.get("error");
     const nonce = store.nonce();
+    const purpose = store.purpose();
     window.history.replaceState(null, "", window.location.pathname);
     store.clearNonce();
+    store.clearPurpose();
 
-    if (denied) return setProblem("cancelled");
-    if (!code || !state || !nonce) return setProblem("failed");
+    if (denied) {
+      setBack(purpose === "activate" ? "/activate" : "/subscribe");
+      return setProblem("cancelled");
+    }
+    if (!code || !state || !nonce) {
+      setBack(purpose === "activate" ? "/activate" : "/subscribe");
+      return setProblem("failed");
+    }
 
-    api<LoginResult>({ action: "login", code, state, nonce })
+    api<LoginResult>({ action: "login", code, state, nonce, purpose })
       .then((r) => {
         store.setSession({ ...r, exp: Date.now() + 29 * 60 * 1000 });
-        window.location.replace("/subscribe");
+        window.location.replace(purpose === "activate" ? "/activate" : "/subscribe");
       })
-      .catch(() => setProblem("failed"));
+      .catch((err: Error & { code?: string }) => {
+        if (err.code === "email_unverified") setMessage(err.message);
+        setProblem("failed");
+        setBack(purpose === "activate" ? "/activate" : "/subscribe");
+      });
   }, []);
 
   return (
@@ -61,10 +76,10 @@ export function AuthCallback() {
               >
                 {problem === "cancelled"
                   ? "You didn't allow the Discord login, so nothing was changed."
-                  : "The login link may have expired. Please try again."}
+                  : message || "The login link may have expired. Please try again."}
               </Alert>
-              <Link className="btn btn-primary plan-cta" href="/subscribe">
-                Back to subscribe
+              <Link className="btn btn-primary plan-cta" href={back}>
+                {back === "/activate" ? "Back to activation" : "Back to subscribe"}
               </Link>
             </div>
           )}

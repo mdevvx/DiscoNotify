@@ -15,6 +15,10 @@
 //   activation { checkout_id }                         → whether the bot has switched the server on
 //   crypto     { t | session+guild_id, months, coin }  → NOWPayments address and amount
 //   crypto_status { id }                               → progress of a crypto payment started here
+//   activate   { session, guild_id }                   → starts a new server's free trial (session from a login with purpose "activate")
+//   unsub_info { t }                                   → masked address behind an unsubscribe link
+//   unsubscribe { t } / resubscribe { t }              → stop / resume reminder emails for that address
+//   POST ?unsub=<token>  (no Origin)                   → one-click List-Unsubscribe from mail apps
 //
 // Security notes: secrets live only in Supabase secrets; a server ID from the browser is never
 // trusted (it must be in the signed link or the signed session); errors are generic and details
@@ -32,6 +36,7 @@ import {
   type Session,
   verifyLink,
   verifySession,
+  verifyUnsub,
   verifyState,
 } from "./security.ts";
 
@@ -128,8 +133,9 @@ type BillingRow = {
   whitelisted: boolean | null;
   card_status: string | null;
   card_cancels_at: string | null;
+  activation_required: boolean | null;
 };
-const BILLING_COLUMNS = "trial_ends_at, paid_until, whitelisted, card_status, card_cancels_at";
+const BILLING_COLUMNS = "trial_ends_at, paid_until, whitelisted, card_status, card_cancels_at, activation_required";
 
 async function botPresent(ids: string[]): Promise<Set<string>> {
   const present = new Set<string>();
@@ -176,6 +182,8 @@ function access(row?: BillingRow | null): { state: string; until: string | null 
   const trial = row.trial_ends_at ? Date.parse(row.trial_ends_at) : null;
   if (paid && now < paid) return { state: "paid", until: row.paid_until };
   if (trial && now < trial) return { state: "trial", until: row.trial_ends_at };
+  // A new server whose free trial hasn't been activated yet.
+  if (!trial && row.activation_required) return { state: "new", until: null };
   const graceEnd = paid ? paid + GRACE_DAYS * DAY : null;
   if (graceEnd && now < graceEnd) return { state: "grace", until: new Date(graceEnd).toISOString() };
   return { state: "expired", until: null };
@@ -281,7 +289,7 @@ async function loginUrl(body: Record<string, unknown>) {
   const params = new URLSearchParams({
     client_id: DISCORD_ID,
     response_type: "code",
-    scope: "identify guilds",
+    scope: body.purpose === "activate" ? "identify email guilds" : "identify guilds",
     redirect_uri: `${SITE_URL}/auth/callback`,
     state: await makeState(nonce, SESSION_SECRET),
     prompt: "none",
@@ -292,6 +300,7 @@ async function loginUrl(body: Record<string, unknown>) {
 async function login(body: Record<string, unknown>) {
   need(DISCORD_ID, DISCORD_SECRET, SESSION_SECRET, SITE_URL);
   const code = str(body.code, 512);
+  const forActivation = body.purpose === "activate";
   if (!code || !(await verifyState(body.state, body.nonce, SESSION_SECRET))) {
     throw new HttpError(400, "The login couldn't be verified. Please try again.", "bad_login");
   }
@@ -345,10 +354,24 @@ async function login(body: Record<string, unknown>) {
       };
     }).sort((a, b) => Number(b.bot) - Number(a.bot) || a.name.localeCompare(b.name));
 
+    let email = "";
+    if (forActivation) {
+      // Only an email Discord has verified is accepted; people can't type another one in.
+      email = me.json.verified === true && typeof me.json.email === "string" ? me.json.email.trim().toLowerCase() : "";
+      if (!EMAIL.test(email)) {
+        throw new HttpError(
+          400,
+          "Discord has no verified email for your account. Verify it in Discord's settings (User Settings → My Account), then try again.",
+          "email_unverified",
+        );
+      }
+    }
+
     const name = str(me.json.global_name, 80) || str(me.json.username, 80) || "Discord user";
     return {
-      session: await makeSession({ id: me.json.id, name }, [...present], SESSION_SECRET),
+      session: await makeSession({ id: me.json.id, name }, [...present], SESSION_SECRET, email || undefined),
       user: { id: me.json.id, name },
+      ...(email && { email }),
       guilds: list,
       price_usd: PRICE_USD,
       card: Boolean(POLAR_TOKEN && POLAR_PRODUCT_ID),
@@ -385,8 +408,10 @@ async function checkout(body: Record<string, unknown>) {
   if (who.userId) metadata.user_id = who.userId;
   if (who.channelId) metadata.channel_id = who.channelId;
 
+  const email = str(body.email, 254).trim().toLowerCase();
   const created = await polar("POST", "/v1/checkouts/", {
     products: [POLAR_PRODUCT_ID],
+    ...(EMAIL.test(email) && { customer_email: email }), // prefill with the address saved as the contact
     metadata,
     allow_trial: trialDays > 0,
     ...(trialDays > 0 && { trial_interval: "day", trial_interval_count: trialDays }),
@@ -416,10 +441,11 @@ async function thanks(body: Record<string, unknown>) {
     return {
       status: str(c?.status, 30) || "unknown",
       trial_end: str(c?.trial_end, 40) || null,
+      email: str(c?.customer_email, 254) || null,
     };
   } catch (err) {
     if (err instanceof HttpError && err.code === "bad_request") throw err;
-    return { status: "error", trial_end: null }; // Polar 404 / unreachable → the page shows its error alert
+    return { status: "error", trial_end: null, email: null }; // Polar 404 / unreachable → the page shows its error alert
   }
 }
 
@@ -553,11 +579,90 @@ async function contact(body: Record<string, unknown>) {
   if (!EMAIL.test(email)) throw new HttpError(400, "Enter a valid email address.", "bad_email");
   await requireBot(who.guildId);
 
-  const { error } = await db.from("notify_contact_emails").upsert(
-    { guild_id: who.guildId, email, discord_user_id: who.userId ?? null, updated_at: new Date().toISOString() },
-    { onConflict: "guild_id" },
+  // Several admins can be contacts for one server. ignoreDuplicates so a saved unsubscribe is never cleared.
+  const { error } = await db.from("notify_email_contacts").upsert(
+    { guild_id: who.guildId, email, discord_user_id: who.userId ?? null, source: "checkout" },
+    { onConflict: "guild_id,email", ignoreDuplicates: true },
   );
   if (error) throw error;
+  return { ok: true };
+}
+
+// ── trial activation (new servers) ────────────────────────────────────────
+
+async function activate(body: Record<string, unknown>) {
+  need(SESSION_SECRET);
+  const session = await verifySession(body.session, SESSION_SECRET);
+  if (!session) throw new HttpError(401, "Your login has expired. Please log in with Discord again.", "session_expired");
+  if (!session.m) {
+    throw new HttpError(401, "Please log in with Discord again so we can read your verified email.", "session_expired");
+  }
+  const guildId = body.guild_id;
+  // Never trust a server ID from the browser: it must be one this person manages and the bot is in.
+  if (!isGuildId(guildId) || !session.g.includes(guildId)) {
+    throw new HttpError(403, "You can't activate that server.", "forbidden");
+  }
+  await requireBot(guildId);
+
+  const { data, error } = await db.rpc("notify_activate_trial", {
+    p_guild_id: guildId, // strings: Discord IDs exceed JS's safe integer range
+    p_user_id: session.u,
+    p_email: session.m,
+    p_trial_days: TRIAL_DAYS,
+  });
+  if (error) {
+    const message = String(error.message ?? "");
+    console.error("notify_activate_trial failed:", message.slice(0, 300));
+    if (message.includes("the bot is not in this server")) {
+      throw new HttpError(404, "DiscoNotify isn't in that server (any more). Add the bot first, then try again.", "no_bot");
+    }
+    if (message.includes("invalid email")) {
+      throw new HttpError(400, "Discord has no verified email for your account. Verify it in Discord's settings, then try again.", "email_unverified");
+    }
+    throw new HttpError(500, GENERIC, "error");
+  }
+  const result = (Array.isArray(data) ? data[0] : data) ?? {};
+  return {
+    status: str(result.status, 30),
+    trial_ends_at: str(result.trial_ends_at, 40) || null,
+    whitelisted: result.whitelisted === true,
+    email: session.m,
+  };
+}
+
+// ── unsubscribe from reminder emails ──────────────────────────────────────
+
+function maskEmail(email: string): string {
+  const [name, domain = ""] = email.split("@");
+  return `${name.slice(0, 1)}***@${domain}`;
+}
+
+// A bad or expired token gets the same neutral answer, so nothing reveals whether an address exists.
+async function unsubToken(body: Record<string, unknown>) {
+  need(LINK_SECRET);
+  const data = await verifyUnsub(body.t, LINK_SECRET);
+  if (!data) throw new HttpError(400, "This link isn't valid any more.", "bad_link");
+  return data;
+}
+
+async function unsubInfo(body: Record<string, unknown>) {
+  const { e } = await unsubToken(body);
+  return { email: maskEmail(e) };
+}
+
+async function setUnsubscribed(email: string, on: boolean) {
+  const query = db.from("notify_email_contacts").update({ marketing_unsubscribed_at: on ? new Date().toISOString() : null }).eq("email", email);
+  const { error } = await (on ? query.is("marketing_unsubscribed_at", null) : query);
+  if (error) throw error;
+}
+
+async function unsubscribe(body: Record<string, unknown>) {
+  await setUnsubscribed((await unsubToken(body)).e, true);
+  return { ok: true };
+}
+
+async function resubscribe(body: Record<string, unknown>) {
+  await setUnsubscribed((await unsubToken(body)).e, false);
   return { ok: true };
 }
 
@@ -603,6 +708,10 @@ const actions: Record<string, { run: (b: Record<string, unknown>) => Promise<unk
   activation: { run: activation, perMinute: 40 },
   crypto: { run: crypto_, perMinute: 10 },
   crypto_status: { run: cryptoStatus, perMinute: 40 },
+  activate: { run: activate, perMinute: 10 },
+  unsub_info: { run: unsubInfo, perMinute: 30 },
+  unsubscribe: { run: unsubscribe, perMinute: 10 },
+  resubscribe: { run: resubscribe, perMinute: 10 },
 };
 
 Deno.serve(async (req) => {
@@ -620,6 +729,22 @@ Deno.serve(async (req) => {
     }),
   };
   const reply = (status: number, data: unknown) => new Response(data === null ? null : JSON.stringify(data), { status, headers });
+
+  // One-click unsubscribe (RFC 8058): mail apps POST here with no Origin, so this runs before the origin check.
+  const oneClick = new URL(req.url).searchParams.get("unsub");
+  if (req.method === "POST" && oneClick) {
+    try {
+      const ip = (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "unknown";
+      rateLimit(ip, "unsub_one_click", 20);
+      if (!(await req.text()).includes("List-Unsubscribe=One-Click")) return reply(400, { error: "Bad request" });
+      await setUnsubscribed((await unsubToken({ t: oneClick })).e, true);
+      return reply(200, { ok: true });
+    } catch (err) {
+      if (err instanceof HttpError) return reply(err.status, { error: err.message, code: err.code });
+      console.error("One-click unsubscribe failed");
+      return reply(500, { error: GENERIC, code: "error" });
+    }
+  }
 
   // Only our own website may call this (browsers always send Origin on cross-origin requests).
   if (!origin) return reply(403, { error: "Forbidden" });

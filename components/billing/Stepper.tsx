@@ -1,10 +1,10 @@
 const STEPS = ["Log in", "Choose server", "Pay"];
 
 /** Three-step progress header for the subscribe flow. `current` is 1-based; earlier steps show a check. */
-export function Stepper({ current }: { current: 1 | 2 | 3 }) {
+export function Stepper({ current, steps = STEPS }: { current: 1 | 2 | 3; steps?: string[] }) {
   return (
-    <ol className="stepper" aria-label="Subscribe progress">
-      {STEPS.map((label, i) => {
+    <ol className="stepper" aria-label="Progress">
+      {steps.map((label, i) => {
         const n = i + 1;
         const state = n < current ? "done" : n === current ? "current" : "todo";
         return (
