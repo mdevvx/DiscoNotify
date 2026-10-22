@@ -29,7 +29,7 @@
   --yt: #ff0033;
   --kick: #3bc10e;
   --ig: #d62976;
-  --discord: #e23748;           /* brand accent for the Add to Discord buttons and community panel */
+  --discord: #5865f2;           /* Discord blurple: Discord buttons and the community panel */
 
   /* Type */
   --font-display: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
@@ -471,7 +471,7 @@ button.btn { cursor: pointer; font-family: inherit; }
 .btn-lg { padding: 0.85rem 1.35rem; font-size: 1rem; border-radius: 10px; }
 .btn-sm { padding: 0.5rem 0.85rem; font-size: 0.85rem; }
 .btn-discord { background: var(--discord); color: #fff; box-shadow: 0 10px 24px -14px var(--discord); }
-.btn-discord:hover { background: #c92a3c; }
+.btn-discord:hover { background: #4752c4; }
 .btn-light { background: #fff; color: #161823; box-shadow: 0 12px 28px -14px rgba(0, 0, 0, 0.5); }
 .btn svg { flex: none; }
 
@@ -504,7 +504,7 @@ button.btn { cursor: pointer; font-family: inherit; }
   position: absolute; inset: 0; pointer-events: none;
   background:
     radial-gradient(42rem 28rem at 85% 10%, color-mix(in srgb, var(--signal) 16%, transparent), transparent 70%),
-    radial-gradient(36rem 26rem at 5% 90%, color-mix(in srgb, var(--discord) 12%, transparent), transparent 70%);
+    radial-gradient(36rem 26rem at 5% 90%, color-mix(in srgb, var(--signal) 10%, transparent), transparent 70%);
 }
 .hero-bg::after {
   content: ""; position: absolute; inset: 0;
@@ -652,7 +652,7 @@ button.btn { cursor: pointer; font-family: inherit; }
 .community li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--discord); flex: none; }
 .community-art {
   display: grid; place-items: center; width: 200px; aspect-ratio: 1; border-radius: 40px;
-  color: #fff; background: linear-gradient(145deg, #f2566a, var(--discord));
+  color: #fff; background: linear-gradient(145deg, #7983f5, var(--discord));
   box-shadow: 0 30px 60px -30px var(--discord);
   transform: rotate(-6deg);
 }
@@ -1004,7 +1004,7 @@ html { scrollbar-width: auto; scrollbar-color: var(--signal) var(--bg); }
 .btn-primary:hover { box-shadow: var(--shadow-md); }
 .btn-ghost { box-shadow: var(--shadow-sm); }
 .btn-ghost:hover { border-color: color-mix(in srgb, var(--signal) 45%, var(--line)); }
-.btn-discord { background: var(--grad-signal); }
+.btn-discord { background: linear-gradient(135deg, #7983f5 0%, #5865f2 55%, #4752c4 100%); }
 .btn-light:hover { box-shadow: 0 16px 34px -14px rgba(0, 0, 0, 0.6); }
 
 /* Hero */
@@ -1223,3 +1223,8 @@ html.js .reveal.in { transform: none; }
 .feature:hover, .step:hover { box-shadow: var(--shadow-sm); }
 .feature-icon, .step::before, .plan-ribbon, .community-art, .cta-card, .stepper-item[data-state="current"] .stepper-dot, .choice input:checked + span { box-shadow: none; }
 .stepper-item[data-state="current"] .stepper-dot { border-color: transparent; }
+
+/* Brand-red button (used where blurple doesn't fit, e.g. the footer) and a readable footer wordmark */
+.btn-brand { background: var(--grad-signal); color: #fff; }
+.btn-brand:hover { background: #c92a3c; }
+.site-footer .brand { color: var(--ink); }

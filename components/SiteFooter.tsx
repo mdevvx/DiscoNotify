@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { PulseMark } from "./Logo";
-import { DiscordIcon } from "./Icons";
 
 type Page = "home" | "terms" | "privacy" | "refund" | "pay" | "subscribe" | "manage";
 
@@ -28,14 +27,6 @@ export function SiteFooter({ current }: { current: Page }) {
                         Discord alerts the moment your creators upload, post or
                         go live.
                     </p>
-                    <a
-                        className="btn btn-discord btn-sm"
-                        href={site.supportServer}
-                        rel="noopener"
-                    >
-                        <DiscordIcon size={16} />
-                        Join our Discord
-                    </a>
                 </div>
 
                 <nav aria-label="Legal" className="footer-col">
