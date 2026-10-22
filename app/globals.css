@@ -1241,3 +1241,21 @@ html.js .reveal.in { transform: none; }
 .server-option[aria-checked="true"] { border-color: var(--signal); background: var(--signal-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--signal) 20%, transparent); }
 .server-option:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
 .unsub-title { font-size: var(--step-2); letter-spacing: -0.025em; }
+
+/* Logo white: solid buttons and stat numbers use plain white in dark mode (no gradients) */
+:root { --btn-solid: #161823; --btn-solid-ink: #fff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --btn-solid: #fff; --btn-solid-ink: #161823; } }
+:root[data-theme="dark"] { --btn-solid: #fff; --btn-solid-ink: #161823; }
+.btn-primary, .nav .btn-primary { background: var(--btn-solid); color: var(--btn-solid-ink); }
+.btn-primary:hover { background: color-mix(in srgb, var(--btn-solid) 88%, var(--signal)); }
+.facts dd { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--ink); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .facts dd { color: #fff; } }
+:root[data-theme="dark"] .facts dd { color: #fff; }
+
+/* Live indicator: a true circle with a ring that expands from its edge */
+.pulse-dot {
+  display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+  background: currentColor; font-size: 0; line-height: 0; vertical-align: middle;
+}
+.pulse-dot::after { inset: 0; border-width: 2px; animation: pulse-ring 1.8s ease-out infinite; }
+@keyframes pulse-ring { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(2.2); opacity: 0; } }

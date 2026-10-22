@@ -138,9 +138,7 @@ export function AlertPreview() {
             </div>
             <p>
               <span className="dc-role">@Live Alerts</span>{" "}
-              <span className="pulse-dot" style={{ color: ex.color }}>
-                &#9679;
-              </span>{" "}
+              <span className="pulse-dot" aria-hidden="true" style={{ color: ex.color }} />{" "}
               <strong>{ex.creator}</strong> {ex.action}
             </p>
             <div className="dc-container" style={{ borderLeftColor: ex.color }}>
