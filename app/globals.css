@@ -1287,3 +1287,14 @@ html.js .reveal.in { transform: none; }
 .nf-links a { text-decoration: none; transition: border-color 0.15s ease, color 0.15s ease; }
 .nf-links a:hover { border-color: var(--signal); color: var(--ink); }
 @media (max-width: 560px) { .nf-actions { display: grid; width: 100%; } .nf-actions .btn { width: 100%; justify-content: center; } }
+
+/* 404: even optical spacing around the logo tile (the glyph "4" has uneven side bearings) and chip-style shortcuts */
+.nf-code { gap: 0; letter-spacing: 0; }
+.nf-code > span:first-child { margin-right: -0.04em; }
+.nf-code > span:last-child { margin-left: 0.06em; }
+.nf-mark { width: 0.7em; height: 0.7em; }
+.nf-links a {
+  display: inline-flex; padding: 0.35rem 0.8rem; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--line);
+  font-size: 0.82rem; font-weight: 600; color: var(--ink-2);
+}
