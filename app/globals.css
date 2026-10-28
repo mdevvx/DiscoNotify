@@ -1303,3 +1303,7 @@ html.js .reveal.in { transform: none; }
 .nf-code > span:first-child { margin-right: -0.018em; }
 .nf-code > span:last-child { margin-left: 0.096em; }
 .nf-mark { width: 0.76em; height: 0.76em; transform: translateY(0.03em); }
+
+/* 404: gaps measured from a rendered screenshot, 0.1em of ink-to-tile space on both sides */
+.nf-code > span:first-child { margin-right: 0.067em; }
+.nf-code > span:last-child { margin-left: 0.066em; }
