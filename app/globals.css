@@ -1298,3 +1298,8 @@ html.js .reveal.in { transform: none; }
   background: var(--surface); border: 1px solid var(--line);
   font-size: 0.82rem; font-weight: 600; color: var(--ink-2);
 }
+
+/* 404: the tile matches the digits' height and baseline, with equal gaps either side */
+.nf-code > span:first-child { margin-right: -0.018em; }
+.nf-code > span:last-child { margin-left: 0.096em; }
+.nf-mark { width: 0.76em; height: 0.76em; transform: translateY(0.03em); }
