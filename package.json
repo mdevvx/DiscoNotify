@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "serve out"
+    "start": "serve out -c ../serve.json"
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "5.3.0",
