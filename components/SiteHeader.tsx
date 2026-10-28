@@ -7,6 +7,7 @@ import { MobileMenu } from "./MobileMenu";
 const links = [
   { href: "/#platforms", label: "Platforms" },
   { href: "/#features", label: "Features" },
+  { href: "/#setup", label: "How it works" },
   { href: "/#commands", label: "Commands" },
   { href: "/#pricing", label: "Pricing" },
   { href: "/#faq", label: "FAQ" },
@@ -26,9 +27,6 @@ export function SiteHeader() {
               {l.label}
             </Link>
           ))}
-          <Link className="btn btn-primary btn-sm nav-cta" href="/activate">
-            Start free trial
-          </Link>
           <ThemeToggle />
           <MobileMenu links={links} supportUrl={site.supportServer} />
         </nav>

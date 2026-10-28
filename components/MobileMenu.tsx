@@ -57,13 +57,6 @@ export function MobileMenu({ links, supportUrl }: Props) {
                         {l.label}
                     </Link>
                 ))}
-                <Link
-                    className="menu-add"
-                    href="/activate"
-                    onClick={() => setOpen(false)}
-                >
-                    Start free trial
-                </Link>
                 <a
                     href={supportUrl}
                     rel="noopener"
