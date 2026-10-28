@@ -8,7 +8,7 @@ import { Stepper } from "./Stepper";
 
 type LoginResult = {
   session: string;
-  user: { id: string; name: string };
+  user: { id: string; name: string; avatar?: string | null };
   guilds: Guild[];
   email?: string;
   price_usd: number;

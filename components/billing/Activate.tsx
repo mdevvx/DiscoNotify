@@ -8,6 +8,7 @@ import { Alert } from "./Alert";
 import { api, ApiError, Guild, longDate, newNonce, store, StoredSession } from "./api";
 import { ServerIcon } from "./ServerSelect";
 import { Stepper } from "./Stepper";
+import { UserAvatar } from "./UserAvatar";
 
 type View =
   | { mode: "loading" }
@@ -223,9 +224,7 @@ function Servers({
       </div>
       <div className="server-chip">
         <span className="user-line">
-          <span className="user-avatar" aria-hidden="true">
-            {session.user.name.slice(0, 1).toUpperCase()}
-          </span>
+          <UserAvatar user={session.user} />
           <span>
             Logged in as <strong>{session.user.name}</strong>
           </span>

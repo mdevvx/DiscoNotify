@@ -26,6 +26,9 @@ export function SiteHeader() {
               {l.label}
             </Link>
           ))}
+          <Link className="btn btn-primary btn-sm nav-cta" href="/activate">
+            Avail the trial
+          </Link>
           <ThemeToggle />
           <MobileMenu links={links} supportUrl={site.supportServer} />
         </nav>

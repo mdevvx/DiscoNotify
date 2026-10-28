@@ -370,7 +370,11 @@ async function login(body: Record<string, unknown>) {
     const name = str(me.json.global_name, 80) || str(me.json.username, 80) || "Discord user";
     return {
       session: await makeSession({ id: me.json.id, name }, [...present], SESSION_SECRET, email || undefined),
-      user: { id: me.json.id, name },
+      user: {
+        id: me.json.id,
+        name,
+        avatar: typeof me.json.avatar === "string" && /^[a-z0-9_]{1,64}$/i.test(me.json.avatar) ? me.json.avatar : null,
+      },
       ...(email && { email }),
       guilds: list,
       price_usd: PRICE_USD,

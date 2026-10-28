@@ -58,7 +58,7 @@ export type Guild = {
 
 export type StoredSession = {
   session: string;
-  user: { id: string; name: string };
+  user: { id: string; name: string; avatar?: string | null };
   guilds: Guild[];
   price_usd: number;
   card: boolean;

@@ -8,6 +8,7 @@ import { api, ApiError, Guild, longDate, newNonce, store, StoredSession } from "
 import { PayPanel, type Auth, type PayInfo } from "./PayPanel";
 import { ServerSelect } from "./ServerSelect";
 import { LockIcon, Stepper } from "./Stepper";
+import { UserAvatar } from "./UserAvatar";
 
 type LinkInfo = {
   guild_id: string;
@@ -187,9 +188,7 @@ export function Subscribe() {
                 </div>
                 <div className="server-chip">
                   <span className="user-line">
-                    <span className="user-avatar" aria-hidden="true">
-                      {view.session.user.name.slice(0, 1).toUpperCase()}
-                    </span>
+                    <UserAvatar user={view.session.user} />
                     <span>
                       Logged in as <strong>{view.session.user.name}</strong>
                     </span>
