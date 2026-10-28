@@ -9,7 +9,7 @@ const faqs: { q: string; a: ReactNode }[] = [
   },
   {
     q: "Do the creators need to approve anything?",
-    a: "No. DiscoNotify only reads public information: public YouTube channels, Kick channels, Instagram Business or Creator accounts, X accounts and TikTok accounts.",
+    a: "No. DiscoNotify only reads public information: public YouTube channels, Twitch and Kick channels, Instagram Business or Creator accounts, X accounts and TikTok accounts.",
   },
   {
     q: "How does the free trial work?",
@@ -61,6 +61,16 @@ const faqs: { q: string; a: ReactNode }[] = [
         No. Run <code>/notify account-add</code>, choose TikTok and enter <code>@username</code> or the profile
         link. Live streams and private accounts aren&apos;t supported, and TikTok counts toward your server&apos;s
         account limit like any other platform.
+      </>
+    ),
+  },
+  {
+    q: "How do I add a Twitch channel?",
+    a: (
+      <>
+        Run <code>/notify account-add</code>, choose Twitch and enter the channel name or a <code>twitch.tv/…</code>{" "}
+        link. The channel doesn&apos;t need to be live yet: the alert posts when the stream starts, with the title, game,
+        viewer count and a Watch on Twitch button, and a second message when it ends if that alert type is on.
       </>
     ),
   },

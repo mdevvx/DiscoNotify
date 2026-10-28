@@ -9,7 +9,7 @@ export const site = {
   name: "DiscoNotify",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://disconotify.com",
   description:
-    "DiscoNotify posts Discord alerts the moment your creators upload, post or go live on YouTube, Kick, Instagram, X and TikTok, with checks as often as every 30 seconds.",
+    "DiscoNotify posts Discord alerts the moment your creators upload, post or go live on YouTube, Twitch, Kick, Instagram, X and TikTok, with checks as often as every 30 seconds.",
   // A full invite link in NEXT_PUBLIC_DISCORD_INVITE_URL wins; otherwise it is built from the client ID.
   inviteUrl:
     process.env.NEXT_PUBLIC_DISCORD_INVITE_URL ||

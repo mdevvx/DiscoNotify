@@ -2,12 +2,11 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 
 const included = [
-  "YouTube, Kick, Instagram, X and TikTok alerts",
+  "YouTube, Twitch, Kick, Instagram, X and TikTok alerts",
   "Uploads, Shorts, posts, Reels, X posts and live streams",
   "As many followed accounts as your server needs",
   "Custom messages and role mentions",
   "Alerts under your own name and avatar",
-  "Twitch when it launches, at no extra cost",
   "Support in our Discord server",
 ];
 

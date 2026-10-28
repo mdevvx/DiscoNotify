@@ -30,6 +30,15 @@ const available: Platform[] = [
         speed: "Every 30s",
     },
     {
+        name: "Twitch",
+        color: "#9146ff",
+        uploads: null,
+        short: null,
+        liveStart: "Yes",
+        liveEnd: "Yes",
+        speed: "Live checks",
+    },
+    {
         name: "Instagram",
         color: "var(--ig)",
         uploads: "Posts",
@@ -55,18 +64,6 @@ const available: Platform[] = [
         liveStart: null,
         liveEnd: null,
         speed: "About 2 min",
-    },
-];
-
-const testing: Platform[] = [
-    {
-        name: "Twitch",
-        color: "#9146ff",
-        uploads: null,
-        short: null,
-        liveStart: "Yes",
-        liveEnd: "Yes",
-        speed: "Soon",
     },
 ];
 
@@ -120,7 +117,7 @@ function Td({ value, label }: { value: Cell; label: string }) {
     );
 }
 
-function Row({ p, status }: { p: Platform; status: "ok" | "wait" }) {
+function Row({ p }: { p: Platform }) {
     return (
         <tr>
             <th scope="row">
@@ -135,11 +132,7 @@ function Row({ p, status }: { p: Platform; status: "ok" | "wait" }) {
                 {p.speed}
             </td>
             <td className="status" data-label="Status">
-                {status === "ok" ? (
-                    <span className="pill pill-ok">Available</span>
-                ) : (
-                    <span className="pill pill-wait">Coming soon</span>
-                )}
+                <span className="pill pill-ok">Available</span>
             </td>
         </tr>
     );
@@ -174,15 +167,7 @@ export function Platforms() {
                         </thead>
                         <tbody>
                             {available.map((p) => (
-                                <Row key={p.name} p={p} status="ok" />
-                            ))}
-                            <tr className="grp">
-                                <th scope="row" colSpan={7}>
-                                    In testing
-                                </th>
-                            </tr>
-                            {testing.map((p) => (
-                                <Row key={p.name} p={p} status="wait" />
+                                <Row key={p.name} p={p} />
                             ))}
                         </tbody>
                     </table>

@@ -126,7 +126,7 @@ export function Subscribe() {
             within about 2 minutes of paying.
           </p>
           <ul className="plan-list">
-            <li>YouTube, Kick, Instagram, X and TikTok alerts</li>
+            <li>YouTube, Twitch, Kick, Instagram, X and TikTok alerts</li>
             <li>Custom messages, role mentions and your own webhook name</li>
             <li>{site.price.trialDays}-day free trial: pay by card and nothing is charged until it ends</li>
             <li>Cancel anytime, with a 14-day money-back guarantee</li>

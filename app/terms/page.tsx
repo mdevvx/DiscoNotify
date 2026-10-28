@@ -297,7 +297,7 @@ const sections: LegalSection[] = [
                 </ul>
                 <p>
                     We are not affiliated with, endorsed by or sponsored by
-                    Discord, Google, YouTube, Kick, Meta, X, TikTok, ByteDance
+                    Discord, Google, YouTube, Twitch, Kick, Meta, X, TikTok, ByteDance
                     or their affiliates. TikTok is a trademark of its owner,
                     used only to describe compatibility. If one of these
                     platforms changes or restricts access, we may have to

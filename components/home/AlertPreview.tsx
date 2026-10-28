@@ -50,6 +50,21 @@ const examples: Example[] = [
     button: "Watch on Kick",
   },
   {
+    key: "twitch",
+    platform: "Twitch",
+    color: "#9146ff",
+    creator: "StreamerName",
+    avatar: "linear-gradient(135deg, #5b21b6, #c084fc)",
+    action: "is live now!",
+    title: "Ranked climb to Radiant | chill vibes",
+    sub: "StreamerName is playing VALORANT on Twitch!",
+    thumb:
+      "radial-gradient(110% 90% at 20% 15%, #9146ff 0%, transparent 55%), radial-gradient(90% 80% at 90% 90%, #3b1d8f 0%, transparent 60%), #140c29",
+    badge: "LIVE",
+    stat: "2,031 watching",
+    button: "Watch on Twitch",
+  },
+  {
     key: "ig",
     platform: "Instagram",
     color: "var(--ig)",

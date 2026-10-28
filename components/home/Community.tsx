@@ -3,7 +3,7 @@ import { DiscordIcon } from "../Icons";
 
 const perks = [
   "Help setting up alerts, messages and mentions",
-  "Announcements when Twitch goes live",
+  "Announcements about new platforms and updates",
   "Request features and report bugs directly",
 ];
 

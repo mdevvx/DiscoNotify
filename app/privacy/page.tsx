@@ -27,7 +27,7 @@ const sections: LegalSection[] = [
           <li>We don't store chat messages, member lists or any information about the people in your server.</li>
           <li>Card payments are handled by Polar, our Merchant of Record, and crypto payments by NOWPayments. We never see or store your card details or wallet keys.</li>
           <li>If you log in with Discord to subscribe, we use it only to show the servers you manage and tie the payment to your Discord ID. The Discord token is discarded straight after.</li>
-          <li>We only read public information from YouTube, Kick, Instagram, X and TikTok.</li>
+          <li>We only read public information from YouTube, Twitch, Kick, Instagram, X and TikTok.</li>
           <li>We don't sell data, share it for advertising or use it to train AI models.</li>
         </ul>
       </>
@@ -110,7 +110,7 @@ const sections: LegalSection[] = [
           <li><strong>Members.</strong> We don't store member lists, usernames, roles held by members, avatars or activity.</li>
           <li><strong>Who ran a command.</strong> Discord tells the bot who ran a command so it can check permissions and make sure only that person can press confirmation buttons. This is used in the moment and not saved.</li>
           <li><strong>Card details and wallets.</strong> Card and bank details are entered on Polar's checkout and never reach our servers. For crypto we only see the payment shown to you, never your wallet keys.</li>
-          <li><strong>Platform logins.</strong> We never ask for, receive or store your YouTube, Google, Kick, Instagram, Facebook or TikTok credentials, and we never access any account on your behalf.</li>
+          <li><strong>Platform logins.</strong> We never ask for, receive or store your YouTube, Google, Twitch, Kick, Instagram, Facebook or TikTok credentials, and we never access any account on your behalf.</li>
           <li><strong>Private TikTok content.</strong> We don't read private TikTok accounts or private content, and we collect no data about a creator's followers or viewers.</li>
         </ul>
       </>
@@ -139,6 +139,7 @@ const sections: LegalSection[] = [
           <li><strong>Supabase</strong> hosts our database, where the data listed above is stored, and runs the secure service behind our subscribe page. See the <a href="https://supabase.com/privacy" rel="noopener">Supabase Privacy Policy</a>.</li>
           <li><strong>Our hosting provider</strong> runs the bot's servers.</li>
           <li><strong>YouTube API Services</strong> are used to read public channel information, uploads and live status. DiscoNotify uses an API key only and doesn't access any Google account. See the <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a> and the <a href="https://www.youtube.com/t/terms" rel="noopener">YouTube Terms of Service</a>.</li>
+          <li><strong>Twitch's public API</strong> is used to read public channel information: live status, channel name and avatar. We don't use a Twitch login and collect nothing about viewers. See the <a href="https://www.twitch.tv/p/legal/privacy-notice/" rel="noopener">Twitch Privacy Notice</a>.</li>
           <li><strong>Kick's public API</strong> is used to read public channel and live status information. See the <a href="https://kick.com/privacy-policy" rel="noopener">Kick Privacy Policy</a>.</li>
           <li><strong>Meta's Instagram Graph API</strong> is used to read public posts and Reels from Instagram Business and Creator accounts. See the <a href="https://privacycenter.instagram.com/policy" rel="noopener">Instagram Privacy Policy</a>.</li>
           <li><strong>TikTok</strong> public pages are requested from our hosting provider to read public videos from public accounts, so TikTok sees those requests. We have no partnership with TikTok and don't use a TikTok login. The creator's public username, numeric ID, display name, avatar link, captions, covers and video links are shown in the server's Discord channel and stored only as needed to send alerts and avoid duplicates.</li>

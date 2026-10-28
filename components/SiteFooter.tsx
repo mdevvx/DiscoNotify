@@ -66,7 +66,7 @@ export function SiteFooter({ current }: { current: Page }) {
                     &copy; {new Date().getFullYear()} {site.name}. All rights
                     reserved.
                 </span>
-                <span>Not affiliated with Discord, YouTube, Kick, TikTok, Meta or X.</span>
+                <span>Not affiliated with Discord, YouTube, Twitch, Kick, TikTok, Meta or X.</span>
             </div>
         </footer>
     );

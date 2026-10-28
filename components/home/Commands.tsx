@@ -1,7 +1,7 @@
 const commands = [
     {
         cmd: "account-add",
-        desc: "Start following a YouTube, Kick, Instagram, X or TikTok account and choose where its alerts go.",
+        desc: "Start following a YouTube, Twitch, Kick, Instagram, X or TikTok account and choose where its alerts go.",
         perm: "Manage Server",
     },
     {
