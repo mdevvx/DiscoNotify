@@ -62,7 +62,7 @@ export function MobileMenu({ links, supportUrl }: Props) {
                     href="/activate"
                     onClick={() => setOpen(false)}
                 >
-                    Avail the trial
+                    Start free trial
                 </Link>
                 <a
                     href={supportUrl}

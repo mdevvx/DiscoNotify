@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { site } from "@/lib/site";
 import { ArrowIcon, DiscordIcon } from "../Icons";
 import { AlertPreview } from "./AlertPreview";
@@ -31,7 +32,10 @@ export function Hero() {
               <DiscordIcon />
               Add to Discord
             </a>
-            <a className="btn btn-ghost btn-lg" href="#setup">
+            <Link className="btn btn-brand btn-lg" href="/activate">
+              Start free trial
+            </Link>
+            <a className="hero-link" href="#setup">
               See how it works
               <ArrowIcon />
             </a>

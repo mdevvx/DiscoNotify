@@ -1261,3 +1261,11 @@ html.js .reveal.in { transform: none; }
 @keyframes pulse-ring { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(2.2); opacity: 0; } }
 
 .user-avatar { object-fit: cover; }
+
+/* Brand-red solid button and the quiet text link next to the hero buttons */
+.btn-brand { background: var(--signal); color: #fff; }
+.btn-brand:hover { background: color-mix(in srgb, var(--signal) 85%, #000); }
+.hero-actions { align-items: center; }
+.hero-link { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.85rem 0.5rem; font-weight: 600; color: var(--ink-2); text-decoration: none; }
+.hero-link:hover { color: var(--ink); }
+@media (max-width: 560px) { .hero-link { justify-content: center; } }
