@@ -26,9 +26,6 @@ export function SiteHeader() {
             </Link>
           ))}
           <ThemeToggle />
-          <a className="btn btn-ghost btn-sm nav-secondary" href={site.inviteUrl}>
-            Add to Discord
-          </a>
           <a className="btn btn-brand btn-sm" href={site.dashboardUrl}>
             Open dashboard
           </a>
