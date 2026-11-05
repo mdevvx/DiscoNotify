@@ -2,8 +2,8 @@
 
 const clientId = process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID || "YOUR_CLIENT_ID";
 
-// View Channel + Send Messages + Embed Links + Mention Everyone + Manage Webhooks (must match the dashboard's invite link)
-const BOT_PERMISSIONS = "537021568";
+// Administrator, View Channels, Send Messages, Embed Links, Attach Files, Read Message History, Add Reactions, Manage Webhooks (keep equal to the Developer Portal install settings)
+const BOT_PERMISSIONS = "536988744";
 
 export const site = {
   name: "DiscoNotify",

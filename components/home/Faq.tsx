@@ -47,7 +47,7 @@ const faqs: { q: string; a: ReactNode }[] = [
   },
   {
     q: "Which permissions does the bot need?",
-    a: "View Channel, Send Messages and Manage Webhooks, so alerts can post under your own name and avatar. Mention Everyone is only needed if you want @everyone pings.",
+    a: "Administrator, View Channels, Send Messages, Embed Links, Attach Files, Read Message History, Add Reactions and Manage Webhooks. Manage Webhooks lets alerts post under your own name and avatar. Administrator is included so setup never fails on a missing permission.",
   },
   {
     q: "Can I get a refund?",

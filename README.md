@@ -28,7 +28,7 @@ Copy `.env.example` to `.env.local`. These are public values; **never put a secr
 | ------------------------------- | ------------------------------------------------ |
 | `NEXT_PUBLIC_SITE_URL`          | `https://disconotify.com`                        |
 | `NEXT_PUBLIC_DASHBOARD_URL`     | Optional, defaults to `https://dashboard.disconotify.com` |
-| `NEXT_PUBLIC_DISCORD_CLIENT_ID` | The bot's application ID (builds the invite link, permissions `537021568`) |
+| `NEXT_PUBLIC_DISCORD_CLIENT_ID` | The bot's application ID (builds the invite link, permissions `536988744`) |
 | `NEXT_PUBLIC_SUPPORT_EMAIL`     | `support@disconotify.com`                        |
 | `NEXT_PUBLIC_SUPPORT_SERVER`    | `https://discord.gg/abc123`                      |
 | `NEXT_PUBLIC_LEGAL_NAME`, `NEXT_PUBLIC_LEGAL_ADDRESS` | Shown in the legal pages   |
