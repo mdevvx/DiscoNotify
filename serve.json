@@ -6,16 +6,68 @@
     {
       "source": "**",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=()" },
-        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
+        }
       ]
     },
     {
       "source": "_next/static/**",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/subscribe",
+      "destination": "https://dashboard.disconotify.com/billing",
+      "type": 301
+    },
+    {
+      "source": "/manage",
+      "destination": "https://dashboard.disconotify.com/billing",
+      "type": 301
+    },
+    {
+      "source": "/thanks",
+      "destination": "https://dashboard.disconotify.com/billing",
+      "type": 301
+    },
+    {
+      "source": "/pay",
+      "destination": "https://dashboard.disconotify.com/billing",
+      "type": 301
+    },
+    {
+      "source": "/activate",
+      "destination": "https://dashboard.disconotify.com",
+      "type": 301
+    },
+    {
+      "source": "/auth/callback",
+      "destination": "https://dashboard.disconotify.com",
+      "type": 301
     }
   ]
 }

@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-type Props = { links: { href: string; label: string }[]; supportUrl: string };
+type Props = { links: { href: string; label: string }[]; supportUrl: string; inviteUrl: string; dashboardUrl: string };
 
 /** Hamburger menu shown under 760px, where the inline nav links are hidden. */
-export function MobileMenu({ links, supportUrl }: Props) {
+export function MobileMenu({ links, supportUrl, inviteUrl, dashboardUrl }: Props) {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
@@ -57,6 +57,12 @@ export function MobileMenu({ links, supportUrl }: Props) {
                         {l.label}
                     </Link>
                 ))}
+                <a href={dashboardUrl} onClick={() => setOpen(false)}>
+                    Open dashboard
+                </a>
+                <a href={inviteUrl} onClick={() => setOpen(false)}>
+                    Add to Discord
+                </a>
                 <a
                     href={supportUrl}
                     rel="noopener"

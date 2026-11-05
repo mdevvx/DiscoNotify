@@ -4,11 +4,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { site } from "@/lib/site";
 import { Alert } from "./Alert";
-import { api } from "./api";
+import { api, ApiError } from "./api";
 
 type State =
   | { kind: "loading" }
   | { kind: "invalid" }
+  | { kind: "expired" }
   | { kind: "ready"; email: string }
   | { kind: "done"; email: string };
 
@@ -25,7 +26,8 @@ export function Unsubscribe() {
     if (!t) return setState({ kind: "invalid" });
     api<{ email: string }>({ action: "unsub_info", t })
       .then((r) => setState({ kind: "ready", email: r.email }))
-      .catch(() => setState({ kind: "invalid" })); // a bad token gets the same neutral page as any other
+      // a forged or malformed token gets the same neutral page as any other
+      .catch((err) => setState({ kind: err instanceof ApiError && err.code === "expired" ? "expired" : "invalid" }));
   }, []);
 
   async function change(action: "unsubscribe" | "resubscribe") {
@@ -56,10 +58,19 @@ export function Unsubscribe() {
               <span className="spinner" aria-hidden="true" />
               Loading…
             </p>
+          ) : state.kind === "expired" ? (
+            <div className="pay-form">
+              <Alert tone="warning" title="This link has expired">
+                Use the link in a more recent email, or write to {site.supportEmail} and we&apos;ll sort it out.
+              </Alert>
+              <Link className="btn btn-ghost plan-cta" href="/">
+                Back to the home page
+              </Link>
+            </div>
           ) : state.kind === "invalid" ? (
             <div className="pay-form">
               <Alert tone="warning" title="This link isn't valid any more">
-                It may have expired. Use the link in a more recent email, or write to {site.supportEmail}.
+                Use the link in a more recent email, or write to {site.supportEmail}.
               </Alert>
               <Link className="btn btn-ghost plan-cta" href="/">
                 Back to the home page

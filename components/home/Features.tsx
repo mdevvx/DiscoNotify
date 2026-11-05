@@ -19,7 +19,7 @@ const features: { title: string; body: ReactNode; icon: ReactNode }[] = [
     body: (
       <>
         Write the alert text yourself with placeholders like <code>{"{creator}"}</code> and <code>{"{url}"}</code>.
-        Set one for all alerts or a different one per alert type.
+        Set one for all alerts or a different one per alert type, right on the dashboard.
       </>
     ),
     icon: <path {...stroke} d="M4 6h16M4 12h10M4 18h7" />,
@@ -51,7 +51,7 @@ const features: { title: string; body: ReactNode; icon: ReactNode }[] = [
   },
   {
     title: "Choose what gets announced",
-    body: "Turn each alert type on or off per account, and pick which ones show the full card with thumbnail and button.",
+    body: "Turn each alert type on or off per account on the dashboard: new video, Short, post, live start and end with game and viewer count.",
     icon: (
       <>
         <rect x="3" y="4" width="18" height="16" rx="2" {...stroke} />
@@ -70,8 +70,8 @@ const features: { title: string; body: ReactNode; icon: ReactNode }[] = [
     ),
   },
   {
-    title: "Forms, not long commands",
-    body: "Settings open as a short form pre-filled with what's set now: pick the channel, role and alert types from menus.",
+    title: "No setup commands",
+    body: "Add accounts, pick channels and roles, and switch alert types on or off on the dashboard. Sign in securely with Discord.",
     icon: (
       <>
         <rect x="4" y="3" width="16" height="18" rx="2" {...stroke} />

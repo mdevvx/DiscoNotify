@@ -26,7 +26,7 @@ const sections: LegalSection[] = [
                     <strong>{site.legalName}</strong> ("we", "us"), and when you
                     use or buy DiscoNotify your agreement is with us. By adding
                     DiscoNotify to a Discord server, buying a subscription or
-                    using its commands, you agree to these Terms of Service and
+                    using its commands or dashboard, you agree to these Terms of Service and
                     to our <Link href="/privacy">Privacy Policy</Link>. Payments
                     for paid plans are covered by our{" "}
                     <Link href="/refund">Refund Policy</Link>.
@@ -84,22 +84,24 @@ const sections: LegalSection[] = [
                 </p>
                 <ul>
                     <li>
-                        <strong>Price:</strong> DiscoNotify costs{" "}
-                        {site.price.currency}
+                        <strong>Plans:</strong> DiscoNotify has two plans, applied
+                        per Discord server. The <strong>Free</strong> plan costs
+                        nothing and lets a server follow{" "}
+                        {site.plans.freeAccountsPerPlatform} account per platform
+                        (one YouTube, one Twitch, one Kick, one Instagram, one X
+                        and one TikTok account). The <strong>Paid</strong> plan
+                        costs {site.price.currency}
                         {site.price.amount} per {site.price.period} for each
-                        Discord server. For card payments, applicable taxes,
-                        such as VAT or sales tax, are calculated and collected
-                        by Polar at checkout.
+                        Discord server and removes that limit, up to{" "}
+                        {site.plans.maxAccounts} accounts in total per server.
+                        There is no free trial, and Free needs no payment
+                        details. For card payments, applicable taxes, such as VAT
+                        or sales tax, are calculated and collected by Polar at
+                        checkout.
                     </li>
                     <li>
-                        <strong>Free trial:</strong> Each server can start a{" "}
-                        {site.price.trialDays}-day free trial that needs no
-                        payment details. The trial starts when you activate it
-                        on our website, and a server that hasn't activated has
-                        no alerts. If you subscribe by card during the
-                        trial, your card is saved and nothing is charged until
-                        the trial ends. If you cancel before then, you are not
-                        charged.
+                        <strong>Per-server billing:</strong> A subscription
+                        applies only to the server it was bought for.
                     </li>
                     <li>
                         <strong>Card billing and renewal:</strong> Card
@@ -117,8 +119,8 @@ const sections: LegalSection[] = [
                         amount, may not be recoverable.
                     </li>
                     <li>
-                        <strong>Account used to subscribe:</strong> To subscribe
-                        from our website you may log in with Discord. We use
+                        <strong>Account used to subscribe:</strong> You subscribe
+                        on our dashboard by logging in with Discord. We use
                         that login only as described in our{" "}
                         <Link href="/privacy">Privacy Policy</Link>. You must
                         have permission to manage the server you subscribe, and
@@ -126,9 +128,8 @@ const sections: LegalSection[] = [
                     </li>
                     <li>
                         <strong>Cancellation:</strong> You can cancel a card
-                        subscription at any time with{" "}
-                        <code>/notify cancel</code> in Discord or from our{" "}
-                        <Link href="/manage">Manage or cancel</Link> page. Your
+                        subscription at any time on the dashboard under Billing,
+                        then Manage billing. Your
                         subscription stays active until the end of the month you
                         have paid for and is not charged again. Crypto plans
                         simply end when the prepaid time runs out.
@@ -136,9 +137,12 @@ const sections: LegalSection[] = [
                     <li>
                         <strong>Failed or lapsed payments:</strong> If a renewal
                         fails, or prepaid time runs out, and the server isn't
-                        paid up, alerts for that server pause after a 3-day
-                        grace period. Your settings are kept, and alerts resume
-                        once the server is paid again.
+                        paid up, the server returns to the Free plan after a
+                        3-day grace period. Exceeding the free limit after a
+                        downgrade pauses accounts, it never deletes them: the
+                        oldest account of each platform keeps working, the
+                        others pause, and all settings are kept. Paused accounts
+                        resume once the server is paid again.
                     </li>
                     <li>
                         <strong>Price changes:</strong> We will give at least 30
@@ -179,7 +183,7 @@ const sections: LegalSection[] = [
         body: (
             <>
                 <p>
-                    Configuration commands require the Discord{" "}
+                    Changing a server's settings on the dashboard requires the Discord{" "}
                     <strong>Manage Server</strong> permission. Whoever
                     configures DiscoNotify in a server is responsible for:
                 </p>
@@ -427,7 +431,7 @@ const sections: LegalSection[] = [
                 <p>
                     You can stop using DiscoNotify at any time by removing it
                     from your server. You can stop following individual accounts
-                    with <code>/notify account-remove</code>. What happens
+                    on the dashboard. What happens
                     to your server's data afterwards is explained in our{" "}
                     <Link href="/privacy#retention">Privacy Policy</Link>.
                 </p>

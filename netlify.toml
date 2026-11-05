@@ -6,6 +6,43 @@
   NODE_VERSION = "20"
 
 # Security headers (Netlify only; GitHub Pages can't set headers).
+# Old checkout / trial pages now live on the dashboard. Query strings are dropped on purpose.
+[[redirects]]
+  from = "/subscribe"
+  to = "https://dashboard.disconotify.com/billing"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/manage"
+  to = "https://dashboard.disconotify.com/billing"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/thanks"
+  to = "https://dashboard.disconotify.com/billing"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pay"
+  to = "https://dashboard.disconotify.com/billing"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/activate"
+  to = "https://dashboard.disconotify.com"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/auth/callback"
+  to = "https://dashboard.disconotify.com"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]

@@ -27,8 +27,8 @@ const sections: LegalSection[] = [
             </thead>
             <tbody>
               <tr>
-                <td>Cancelled during the free trial</td>
-                <td>Never charged</td>
+                <td>Using the Free plan</td>
+                <td>Nothing to pay, nothing to refund</td>
               </tr>
               <tr>
                 <td>Any payment, within 14 days</td>
@@ -75,7 +75,7 @@ const sections: LegalSection[] = [
           DiscoNotify costs {site.price.currency}
           {site.price.amount} per {site.price.period} for each Discord server. Card subscriptions are billed monthly in
           advance and renew automatically each month until you cancel. Crypto plans are prepaid for 3, 6 or 12 months and
-          do not renew. Every server starts with a {site.price.trialDays}-day free trial.
+          do not renew. The Free plan (one account per platform) costs nothing, and there is no free trial.
         </p>
       </>
     ),
@@ -137,10 +137,9 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          Cancel a card subscription any time with <code>/notify cancel</code> in your server, or from our{" "}
-          <Link href="/manage">Manage or cancel</Link> page. Only the person who subscribed, or the server owner, can open
-          the billing portal. If you cancel during the free trial you are never charged. If you cancel after paying, the
-          server stays active until the end of the month you paid for. Crypto plans don&apos;t renew, so there is nothing
+          Cancel a card subscription any time on the dashboard: Billing, then Manage billing. Only the person who
+          subscribed, or the server owner, can open the billing portal. If you cancel, the server stays on the Paid plan
+          until the end of the month you paid for, then returns to Free. Crypto plans don&apos;t renew, so there is nothing
           to cancel.
         </p>
         <p>

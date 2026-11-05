@@ -2,8 +2,8 @@
 
 const clientId = process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID || "YOUR_CLIENT_ID";
 
-// Send Messages (2048) + Embed Links (16384) + Manage Webhooks (536870912) + Use Application Commands (2147483648)
-const BOT_PERMISSIONS = "2684372992";
+// View Channel + Send Messages + Embed Links + Mention Everyone + Manage Webhooks (must match the dashboard's invite link)
+const BOT_PERMISSIONS = "537021568";
 
 export const site = {
   name: "DiscoNotify",
@@ -18,9 +18,9 @@ export const site = {
   legalName: process.env.NEXT_PUBLIC_LEGAL_NAME || "Muhammad Nadeem",
   legalAddress: process.env.NEXT_PUBLIC_LEGAL_ADDRESS || "Lahore, Pakistan",
   discordClientId: clientId,
-  // Optional: your Polar customer portal link, shown on the Manage page.
-  polarPortalUrl: process.env.NEXT_PUBLIC_POLAR_PORTAL_URL || "",
-  // Supabase Edge Function that starts card and crypto checkouts (supabase/functions/billing).
+  // The app: login, accounts, alert settings and billing all live here.
+  dashboardUrl: (process.env.NEXT_PUBLIC_DASHBOARD_URL || "https://dashboard.disconotify.com").replace(/\/+$/, ""),
+  // Supabase Edge Function for unsubscribe links and the maintenance banner (supabase/functions/billing).
   billingApi: process.env.NEXT_PUBLIC_BILLING_API_URL || "",
   supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "support@yourdomain.com",
   supportServer: process.env.NEXT_PUBLIC_SUPPORT_SERVER || "https://discord.gg/nwSDAtjNZD",
@@ -28,7 +28,12 @@ export const site = {
     amount: 1.99,
     currency: "$",
     period: "month",
-    trialDays: 7,
   },
-  legalUpdated: "October 13, 2026",
+  // Plan limits. Keep equal to the dashboard and the bot.
+  plans: {
+    freeAccountsPerPlatform: 1,
+    maxAccounts: 25,
+    cryptoMonths: [3, 6, 12],
+  },
+  legalUpdated: "November 6, 2026",
 } as const;

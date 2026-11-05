@@ -33,14 +33,19 @@ export default function HomePage() {
               <div>
                 <h2>Never miss a stream your community cares about.</h2>
                 <p>
-                  Set up in under two minutes. Free for {site.price.trialDays} days, then {site.price.currency}
-                  {site.price.amount} a {site.price.period}.
+                  Set up in under two minutes. Free for one account per platform, or {site.price.currency}
+                  {site.price.amount} a {site.price.period} per server for unlimited.
                 </p>
               </div>
-              <a className="btn btn-light btn-lg" href={site.inviteUrl}>
-                <DiscordIcon />
-                Add DiscoNotify to Discord
-              </a>
+              <div className="hero-actions">
+                <a className="btn btn-light btn-lg" href={site.inviteUrl}>
+                  <DiscordIcon />
+                  Add to Discord
+                </a>
+                <a className="btn btn-brand btn-lg" href={site.dashboardUrl}>
+                  Open dashboard
+                </a>
+              </div>
             </div>
           </div>
         </section>

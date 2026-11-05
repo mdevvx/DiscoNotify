@@ -2,7 +2,7 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 import { PulseMark } from "./Logo";
 
-type Page = "home" | "terms" | "privacy" | "refund" | "pay" | "subscribe" | "manage";
+type Page = "home" | "terms" | "privacy" | "refund" | "unsubscribe";
 
 const legal: { key: Page; href: string; label: string }[] = [
     { key: "terms", href: "/terms", label: "Terms of Service" },
@@ -45,13 +45,15 @@ export function SiteFooter({ current }: { current: Page }) {
                 </nav>
 
                 <div className="footer-col">
+                    <p className="eyebrow">Product</p>
+                    <a href={site.dashboardUrl}>Open dashboard</a>
+                    <a href={site.inviteUrl}>Add to Discord</a>
+                    <Link href="/#pricing">Pricing</Link>
+                    <Link href="/#faq">FAQ</Link>
+                </div>
+
+                <div className="footer-col">
                     <p className="eyebrow">Support</p>
-                    <Link
-                        href="/manage"
-                        aria-current={current === "manage" ? "page" : undefined}
-                    >
-                        Manage or cancel
-                    </Link>
                     <a href={site.supportServer} rel="noopener">
                         Support Server
                     </a>

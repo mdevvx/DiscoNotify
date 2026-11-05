@@ -1,60 +1,15 @@
 const commands = [
     {
-        cmd: "account-add",
-        desc: "Start following a YouTube, Twitch, Kick, Instagram, X or TikTok account and choose where its alerts go.",
-        perm: "Manage Server",
-    },
-    {
-        cmd: "account-remove",
-        desc: "Stop following an account. Asks you to confirm first, and nothing is deleted if you don't.",
-        perm: "Manage Server",
-    },
-    {
-        cmd: "account-list",
-        desc: "List the accounts this server follows.",
-        perm: "Everyone",
-    },
-    {
-        cmd: "account-info",
-        desc: "Show every alert setting for one account, including its custom message.",
-        perm: "Everyone",
-    },
-    {
-        cmd: "alerts",
-        desc: "Turn alert types and full cards on or off for an account.",
-        perm: "Manage Server",
-    },
-    {
-        cmd: "account-set-message",
-        desc: "Write your own alert text with placeholders.",
-        perm: "Manage Server",
-    },
-    {
-        cmd: "account-set-mention",
-        desc: "Choose a role, @everyone or nobody to ping.",
+        cmd: "dashboard",
+        desc: "Open the dashboard for this server: accounts, alert channel, mentions, alert types, custom messages and billing.",
         perm: "Manage Server",
     },
     {
         cmd: "status",
-        desc: "See your subscription and every followed account: its channel, who gets pinged, whether it's live, and when it was last checked and last alerted.",
+        desc: "See the plan and health of every followed account: its channel, whether it's live, and when it was last checked and last alerted.",
         perm: "Everyone",
     },
-    {
-        cmd: "subscribe",
-        desc: "See your trial or subscription and get a link to subscribe on the website, by card or crypto.",
-        perm: "Manage Server",
-    },
-    {
-        cmd: "cancel",
-        desc: "See what cancelling means for this server and get a link to cancel on the website.",
-        perm: "Manage Server",
-    },
-    {
-        cmd: "toggle",
-        desc: "Pause or resume all monitoring and alerts in this server.",
-        perm: "Manage Server",
-    },
-    { cmd: "help", desc: "List every command.", perm: "Everyone" },
+    { cmd: "help", desc: "Show what DiscoNotify can do and where to set it up.", perm: "Everyone" },
 ];
 
 export function Commands() {
@@ -63,10 +18,9 @@ export function Commands() {
             <div className="wrap">
                 <div className="section-head reveal">
                     <p className="eyebrow">Commands</p>
-                    <h2>Everything lives under /notify</h2>
+                    <h2>Just three commands</h2>
                     <p>
-                        Run <code>/notify help</code> in your server for
-                        the full list.
+                        Everything else is configured on the dashboard.
                     </p>
                 </div>
                 <div className="cmd-wrap reveal">

@@ -28,7 +28,7 @@ const rows: { them: string; us: string }[] = [
   },
   {
     them: "Card only, and paying means a long form",
-    us: "Card or crypto, with a free 7-day trial and no card needed",
+    us: "Free for one account per platform, then card or crypto",
   },
 ];
 

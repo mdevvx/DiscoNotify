@@ -15,7 +15,7 @@ export default function UnsubscribePage() {
       <main id="main">
         <Unsubscribe />
       </main>
-      <SiteFooter current="subscribe" />
+      <SiteFooter current="unsubscribe" />
     </>
   );
 }

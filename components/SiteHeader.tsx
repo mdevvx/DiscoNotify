@@ -5,11 +5,9 @@ import { ThemeToggle } from "./ThemeToggle";
 import { MobileMenu } from "./MobileMenu";
 
 const links = [
-  { href: "/#platforms", label: "Platforms" },
   { href: "/#features", label: "Features" },
-  { href: "/#setup", label: "How it works" },
-  { href: "/#commands", label: "Commands" },
   { href: "/#pricing", label: "Pricing" },
+  { href: "/#setup", label: "How it works" },
   { href: "/#faq", label: "FAQ" },
 ];
 
@@ -28,7 +26,13 @@ export function SiteHeader() {
             </Link>
           ))}
           <ThemeToggle />
-          <MobileMenu links={links} supportUrl={site.supportServer} />
+          <a className="btn btn-ghost btn-sm nav-secondary" href={site.inviteUrl}>
+            Add to Discord
+          </a>
+          <a className="btn btn-brand btn-sm" href={site.dashboardUrl}>
+            Open dashboard
+          </a>
+          <MobileMenu links={links} supportUrl={site.supportServer} inviteUrl={site.inviteUrl} dashboardUrl={site.dashboardUrl} />
         </nav>
       </div>
     </header>

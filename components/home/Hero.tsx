@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { site } from "@/lib/site";
 import { ArrowIcon, DiscordIcon } from "../Icons";
 import { AlertPreview } from "./AlertPreview";
@@ -6,8 +5,8 @@ import { AlertPreview } from "./AlertPreview";
 const facts = [
   { value: "30s", label: "fastest check" },
   { value: "6", label: "platforms live today" },
-  { value: `${site.price.trialDays} days`, label: "free trial" },
-  { value: `${site.price.currency}${site.price.amount}`, label: `per server / ${site.price.period}` },
+  { value: "Free", label: "1 account per platform" },
+  { value: `${site.price.currency}${site.price.amount}`, label: `per server / ${site.price.period} for more` },
 ];
 
 export function Hero() {
@@ -21,20 +20,20 @@ export function Hero() {
             Discord alerts for creators
           </p>
           <h1>
-            The moment your creators <em>upload, post or go live.</em>
+            Get alerts in Discord the moment your favourite creators <em>post or go live.</em>
           </h1>
           <p className="lede">
-            DiscoNotify watches YouTube, Twitch, Kick, Instagram, X and TikTok accounts and posts an alert in your Discord channel when
-            they upload, post a Reel or start a stream. Built for speed, with checks as often as every 30 seconds. Set it up with one slash command.
+            YouTube, Twitch, Kick, Instagram, X and TikTok. Set it up in a minute on the dashboard, free for one
+            account per platform.
           </p>
           <div className="hero-actions">
             <a className="btn btn-primary btn-lg" href={site.inviteUrl}>
               <DiscordIcon />
               Add to Discord
             </a>
-            <Link className="btn btn-brand btn-lg" href="/activate">
-              Start free trial
-            </Link>
+            <a className="btn btn-brand btn-lg" href={site.dashboardUrl}>
+              Open dashboard
+            </a>
             <a className="hero-link" href="#setup">
               See how it works
               <ArrowIcon />
@@ -65,7 +64,7 @@ export function Hero() {
               <i className="dot" style={{ background: "#25f4ee" }} />
               TikTok
             </span>
-            <span>{site.price.trialDays}-day free trial, no card needed</span>
+            <span>Free for 1 account per platform, no card needed</span>
           </div>
         </div>
 

@@ -35,29 +35,27 @@ export function Setup() {
         <div className="section-head reveal">
           <p className="eyebrow">Setup</p>
           <h2>Running in under two minutes</h2>
-          <p>You need the Manage Server permission to configure DiscoNotify.</p>
+          <p>Everything is set up on the dashboard. You need the Manage Server permission for the server you configure.</p>
         </div>
 
         <ol className="steps">
           <li className="step reveal">
-            <h3>Add the bot</h3>
+            <h3>Add DiscoNotify</h3>
             <p>
               Invite DiscoNotify to your server. Keep the Manage Webhooks permission so alerts can post under your own
               name and avatar.
             </p>
           </li>
           <li className="step reveal">
-            <h3>Add an account</h3>
+            <h3>Open the dashboard</h3>
             <p>
-              Run <code>/notify account-add</code>, pick the platform, paste the handle or link and choose the
-              channel. A role to mention is optional.
+              Run <code>/notify dashboard</code> or go to the dashboard, log in with Discord and pick your server.
             </p>
           </li>
           <li className="step reveal">
-            <h3>Fine-tune the alerts</h3>
+            <h3>Add accounts</h3>
             <p>
-              Use <code>/notify alerts</code> to pick alert types, and set a custom message or mention whenever you
-              like. Each command opens a form with your current settings.
+              Add accounts and choose where alerts go. Mentions, messages and alert types are all on the dashboard.
             </p>
           </li>
         </ol>
@@ -67,7 +65,7 @@ export function Setup() {
             <p className="eyebrow">Custom message</p>
             <h3 className="template-title">Say it your way</h3>
             <p className="template-copy">
-              Set this with <code>/notify account-set-message</code>, for every alert or just one type. Leave it
+              Set this on the dashboard, for every alert or just one type. Leave it
               empty to go back to the default. Unknown placeholders are left as plain text, so a typo never breaks an
               alert.
             </p>
@@ -82,7 +80,7 @@ export function Setup() {
               <i />
               <i />
               <i />
-              <span>account-set-message</span>
+              <span>custom message</span>
             </div>
             <pre className="code" aria-label="Example custom message">
               <Highlighted text={example} />
