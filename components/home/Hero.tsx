@@ -20,7 +20,7 @@ export function Hero() {
             Discord alerts for creators
           </p>
           <h1>
-            Get alerts in Discord the moment your favourite creators <em>post or go live.</em>
+            Discord alerts the moment your creators <em>post or go live.</em>
           </h1>
           <p className="lede">
             YouTube, Twitch, Kick, Instagram, X and TikTok. Set it up in a minute on the dashboard, free for one
